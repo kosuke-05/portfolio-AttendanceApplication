@@ -1,2 +1,22 @@
-# portfolio-AttendanceApplication
-勤怠管理アプリのポートフォリオ
+# システムの概要
+
+# 主な機能
+
+# 使用技術
+- フロントエンド : React.js / Next.js / Typescript
+
+# 各ページ情報
+
+# 工夫した点
+
+# 苦労した点
+
+# 今後の改善点
+
+# セットアップ方法
+
+# 起動方法
+
+# 作成者
+- kosuke-05
+
