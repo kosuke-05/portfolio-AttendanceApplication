@@ -38,7 +38,7 @@ export const DrawerComponent = () => {
   ];
 
   const Drawer2LayersMenu: Drawer2LayersType[] = [
-    {name: "勤怠情報", value: "attendanceInformation"},
+    {name: "勤怠情報", value: "attendanceInformation", onClick: () => {router.push("/attendanceInformation")}},
     {name: "ログアウト", value: "Logout"}
   ];
 
@@ -75,7 +75,9 @@ export const DrawerComponent = () => {
               <Collapse in={openChildMenu} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {Drawer2LayersMenu.map((item) => (
-                    <ListItemButton key={item.value} >
+                    <ListItemButton
+                      key={item.value}
+                      onClick={item.onClick} >
                       <ListItemText
                         primary={item.name}
                         sx={{
