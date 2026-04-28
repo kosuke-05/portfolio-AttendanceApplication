@@ -3,12 +3,15 @@
 import { ButtonsPropsType } from "@/types/top/topTypes";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { useRouter } from "next/navigation";
 
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
   attendanceArray,
   breakArray
 }: ButtonsPropsType) => {
+  // 画面遷移
+  const router = useRouter();
 
   return (
     <Stack
@@ -54,6 +57,7 @@ export const StampButtons = ({
       </Stack>
       <Button
         variant="text"
+        onClick={() => router.push("/user")}
         sx={{
           alignItems: "center"
         }}>
