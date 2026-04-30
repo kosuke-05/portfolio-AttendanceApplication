@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Box from "@mui/material/Box";
 import { DrawerComponent } from "@/component/drawer/drawer";
+import { QueryProvider } from "@/providers/queryClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,21 +33,23 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Box
-          component="div"
-          sx={{ display: "flex" }}>
-          <DrawerComponent />
+        <QueryProvider>
           <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: 1,
-              ml: `${drawerWidth}px`,
-              boxSizing: "border-box"
-            }}>
-            {children}
+            component="div"
+            sx={{ display: "flex" }}>
+            <DrawerComponent />
+            <Box
+              component="main"
+              sx={{
+                flexGrow: 1,
+                p: 1,
+                ml: `${drawerWidth}px`,
+                boxSizing: "border-box"
+              }}>
+              {children}
+            </Box>
           </Box>
-        </Box>
+        </QueryProvider>
       </body>
     </html>
   );
