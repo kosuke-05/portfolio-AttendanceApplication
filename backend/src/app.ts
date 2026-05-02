@@ -12,6 +12,6 @@ app.use(cors());
 app.use(express.json());
 
 // ルーティング定義
-app.use("/api/user/post", router);
+app.use("/user/post", router);
 
 export default app;

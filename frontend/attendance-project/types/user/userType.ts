@@ -25,3 +25,11 @@ type departmentNameArrayType = {
   name: "総務部" | "開発部" | "経理部" | "営業部",
   value: "generalAffairs" | "development" | "accounting" | "sales"
 };
+
+// ユーザー登録時の初期値
+export type UserInitialFormType = {
+  name: string,
+  departmentName: string,
+  mailAddress: string,
+  password: string
+};
