@@ -9,8 +9,11 @@ export const userPostController = async (req: Request, res: Response) => {
 
     const result = await postService(data);
 
+    console.log(`登録データ：${data}`);
+
     return res.status(201).json(result);
   } catch(err) {
+    console.error(err);
     return res.status(500).json({ message : "error" });
   }
 };

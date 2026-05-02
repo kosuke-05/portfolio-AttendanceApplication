@@ -1,6 +1,6 @@
 "use client"
 
-import { UserType } from "@/types/user/userType";
+import { UserInitialFormType, UserType } from "@/types/user/userType";
 import { UserTextField } from "./userTextField";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import { UserValidations } from "@/schemas/userSchema";
 import { UserSelectBox } from "./userSelectBox";
 import { Box, Stack, Typography } from "@mui/material";
 import { UserRegistrationButton } from "./userButtons";
+import { UserPostHook } from "@/hooks/userPostHook";
 
 // ユーザー関連のロジックコンポーネント
 export const UserLogicComponent = () => {
@@ -23,12 +24,34 @@ export const UserLogicComponent = () => {
     }
   });
 
+  // フォーム初期値
+  const UserInitialForm: UserInitialFormType = {
+    name: "",
+    departmentName: "",
+    mailAddress: "",
+    password: ""
+  };
+
+  // hooksを取得
+  const post = UserPostHook();
+
   /**
    * 新規登録ボタン押下後の処理
+   * ①Hooks層にデータ渡す
    */
-  const registrationStart = () => {
+  const registrationStart = (data: UserType) => {
+    post.mutate(data);
+    afterRegistration();
+  };
 
-  }
+  /**
+   * 登録完了後の処理
+   * ①フォームを初期値（空文字）にリセット
+   * ②
+   */
+  const afterRegistration = () => {
+    methods.reset(UserInitialForm);
+  };
 
   return (
     <FormProvider {...methods}>
