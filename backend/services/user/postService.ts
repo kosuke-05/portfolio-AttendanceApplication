@@ -1,6 +1,7 @@
 import { userPostRepository } from "../../repository/repositories.js";
 import type { UserInputType } from "../../types/user/userType.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // ビジネスロジック
 export const postService = async (data: UserInputType) => {
@@ -21,14 +22,21 @@ export const postService = async (data: UserInputType) => {
   // 返ってきたデータを整形
   const user = result.rows[0];
 
-  console.log(`result : ${result}`);
+  // トークンを生成
+  const token = jwt.sign(
+    { user_id: user.id },
+    "secretKey",
+    { expiresIn: "1h" }
+  );
 
   // パスワード以外を返す
   return {
-    id: user.id,
-    name: user.name,
-    department_name: user.departmentName,
-    mail_address: user.mailAddress,
-    pass_word: user.password
+    user: {
+      id: user.id,
+      name: user.name,
+      department_name: user.departmentName,
+      mail_address: user.mailAddress
+    },
+    token
   }
 };
