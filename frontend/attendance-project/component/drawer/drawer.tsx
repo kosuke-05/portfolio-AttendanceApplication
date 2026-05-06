@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
+import { UserStore } from '@/stores/user/userStore';
 
 // ドロワーメニュー
 export const DrawerComponent = () => {
@@ -20,6 +21,12 @@ export const DrawerComponent = () => {
 
   // ドロワーメニューの2階層目の状態管理
   const [openChildMenu, setOpenChildMenu] = useState<boolean>(false);
+
+  // ストアを取得
+  const loginUser = UserStore((state) => state.loginUser);
+
+  // ストアでユーザー情報をもっているかの判別
+  let userName = loginUser?.name ?? "ゲスト";
 
   /**
    * メニュー一覧
@@ -33,7 +40,7 @@ export const DrawerComponent = () => {
    */
   const DrawerMenu: DrawerMenuType[] = [
     {name: "ホーム", value: "home", icon: <HomeIcon />, onClick: () => {router.push("/")}},
-    {name: "未ログイン さん", value: "user", icon: <AccountCircleIcon />},
+    {name: `${userName} さん`, value: "user", icon: <AccountCircleIcon />},
     {name: "ログイン", value: "Login", icon: <LoginIcon />}
   ];
 
