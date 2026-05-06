@@ -9,6 +9,8 @@ import { UserSelectBox } from "./userSelectBox";
 import { Box, Stack, Typography } from "@mui/material";
 import { UserRegistrationButton } from "./userButtons";
 import { UserPostHook } from "@/hooks/userPostHook";
+import { UserStore } from "@/stores/user/userStore";
+import { useRouter } from "next/navigation";
 
 // ユーザー関連のロジックコンポーネント
 export const UserLogicComponent = () => {
@@ -35,21 +37,26 @@ export const UserLogicComponent = () => {
   // hooksを取得
   const post = UserPostHook();
 
+  // ルーターを取得
+  const router = useRouter();
+
   /**
    * 新規登録ボタン押下後の処理
    * ①Hooks層にデータ渡す
+   * ※返ってきたデータはhooks層で処理する
    */
   const registrationStart = (data: UserType) => {
     post.mutate(data);
-    afterRegistration();
+    afterRegistration(data);
   };
 
   /**
    * 登録完了後の処理
-   * ①フォームを初期値（空文字）にリセット
-   * ②
+   * ①トップ画面に遷移
+   * ②フォームを初期値（空文字）にリセット
    */
-  const afterRegistration = () => {
+  const afterRegistration = (data: UserType) => {
+    router.push("/");
     methods.reset(UserInitialForm);
   };
 

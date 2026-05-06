@@ -33,3 +33,11 @@ export type UserInitialFormType = {
   mailAddress: string,
   password: string
 };
+
+// idを追加した型
+export type UserTypeAddId = {
+  id: string,
+  name: string,
+  departmentName: "generalAffairs" | "development" | "accounting" | "sales",
+  mailAddress: string
+};
