@@ -24,6 +24,7 @@ export const DrawerComponent = () => {
 
   // ストアを取得
   const loginUser = UserStore((state) => state.loginUser);
+  const logout = UserStore((state) => state.logout);
 
   // ストアでユーザー情報をもっているかの判別
   let userName = loginUser?.name ?? "ゲスト";
@@ -41,12 +42,12 @@ export const DrawerComponent = () => {
   const DrawerMenu: DrawerMenuType[] = [
     {name: "ホーム", value: "home", icon: <HomeIcon />, onClick: () => {router.push("/")}},
     {name: `${userName} さん`, value: "user", icon: <AccountCircleIcon />},
-    {name: "ログイン", value: "Login", icon: <LoginIcon />}
+    {name: "ログイン", value: "login", icon: <LoginIcon />}
   ];
 
   const Drawer2LayersMenu: Drawer2LayersType[] = [
     {name: "勤怠情報", value: "attendanceInformation", onClick: () => {router.push("/attendanceInformation")}},
-    {name: "ログアウト", value: "Logout"}
+    {name: "ログアウト", value: "logout", onClick: () => logout()}
   ];
 
   return (

@@ -1,5 +1,6 @@
 "use client"
 
+import { UserStore } from "@/stores/user/userStore";
 import { ButtonsPropsType } from "@/types/top/topTypes";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -12,6 +13,9 @@ export const StampButtons = ({
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();
+
+  // ストアから取得
+  const loginUser = UserStore((state) => state.loginUser);
 
   return (
     <Stack
@@ -58,6 +62,7 @@ export const StampButtons = ({
       <Button
         variant="text"
         onClick={() => router.push("/user")}
+        disabled={!!loginUser}
         sx={{
           alignItems: "center"
         }}>
