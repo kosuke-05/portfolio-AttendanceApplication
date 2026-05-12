@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import router from "../routes/user/route.js";
+import userRouter from "../routes/user/route.js";
+import attendanceRouter from "../routes/attendance/route.js";
 
 // Expressの設定ファイル
 export const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // ルーティング定義
-app.use("/user/post", router);
+app.use("/user/post", userRouter);
+app.use("/attendance/work_start", attendanceRouter);
 
 export default app;
