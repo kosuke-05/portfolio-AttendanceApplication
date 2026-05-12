@@ -2,8 +2,8 @@ import { Router } from "express";
 import { userPostController } from "../../controllers/user/postController.js";
 
 // ルーティング
-const router = Router();
+const userRouter = Router();
 
-router.post("/", userPostController);
+userRouter.post("/", userPostController);
 
-export default router;
+export default userRouter;

@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
   attendanceArray,
-  breakArray
+  breakArray,
+  branchAttendanceStatus
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();
@@ -32,6 +33,7 @@ export const StampButtons = ({
           <Button
             key={item}
             variant="contained"
+            onClick={() => branchAttendanceStatus(item)}
             sx={{
               width: "300px",
               height: "200px",

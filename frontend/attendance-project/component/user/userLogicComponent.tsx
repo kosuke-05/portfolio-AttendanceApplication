@@ -8,7 +8,7 @@ import { UserValidations } from "@/schemas/userSchema";
 import { UserSelectBox } from "./userSelectBox";
 import { Box, Stack, Typography } from "@mui/material";
 import { UserRegistrationButton } from "./userButtons";
-import { UserPostHook } from "@/hooks/userPostHook";
+import { UserPostHook } from "@/hooks/user/userPostHook";
 import { UserStore } from "@/stores/user/userStore";
 import { useRouter } from "next/navigation";
 
