@@ -10,7 +10,8 @@ import { useRouter } from "next/navigation";
 export const StampButtons = ({
   attendanceArray,
   breakArray,
-  branchAttendanceStatus
+  branchAttendanceStatus,
+  attendanceStatus
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();

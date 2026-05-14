@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { StampButtons } from "./stampButtons";
 import { AttendanceType, BreakStartEndType } from "@/types/top/topTypes";
 import { useState } from "react";
+import { AttendancePostHook } from "@/hooks/attendance/attendancePostHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -14,12 +15,24 @@ export const TopLogicComponent = () => {
   const [attendanceStatus, setAttendanceStatus] = useState<"work_start" | "work_finish" | "">("");
 
   /**
+   * ①出勤時のhooks呼び出し
+   */
+  const workStartHook = AttendancePostHook();
+
+  /**
    * 出勤・退勤ボタン押下後の処理
    * ①出勤・退勤いずれかによって処理を分岐
-   * ・出勤の場合・・・hooks層の呼び出し
+   * ②出勤の場合、
+   * ・hooks層を呼び出す
+   * ・attendanceStatusにwork_startを渡す
    */
   const branchAttendanceStatus = (status: AttendanceType) => {
-    if(status === "出勤")
+    if(status === "出勤") {
+      workStartHook.mutate();
+      setAttendanceStatus("work_start");
+    } else if(status === "退勤") {
+
+    }
   };
 
   return (
@@ -34,8 +47,8 @@ export const TopLogicComponent = () => {
       <StampButtons
         attendanceArray={attendanceArray}
         breakArray={breakArray}
-        setAttendanceStatus={setAttendanceStatus}
-        branchAttendanceStatus={branchAttendanceStatus} />
+        branchAttendanceStatus={branchAttendanceStatus}
+        attendanceStatus={attendanceStatus} />
     </Box>
   )
 };

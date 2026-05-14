@@ -1,7 +1,7 @@
-import { userPostRepository } from "../../repository/repositories.js";
 import type { UserInputType } from "../../types/user/userType.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { userPostRepository } from "../../repository/user/repositories.js";
 
 // ビジネスロジック
 export const postService = async (data: UserInputType) => {
