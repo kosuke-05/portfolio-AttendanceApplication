@@ -12,6 +12,6 @@ export type BreakStartEndType = "休憩開始" | "休憩終了";
 export type ButtonsPropsType = {
   attendanceArray: AttendanceType[],
   breakArray: BreakStartEndType[],
-  setAttendanceStatus: Dispatch<SetStateAction<"work_start" | "work_finish" | "">>,
-  branchAttendanceStatus: (status: AttendanceType) => void
+  branchAttendanceStatus: (status: AttendanceType) => void,
+  attendanceStatus: "work_start" | "work_finish" | ""
 };
