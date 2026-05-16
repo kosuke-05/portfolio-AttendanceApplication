@@ -8,7 +8,6 @@ import { AttendancePostHook } from "@/hooks/attendance/attendancePostHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
-  const attendanceArray: AttendanceType[] = ["出勤", "退勤"];
   const breakArray: BreakStartEndType[] = ["休憩開始", "休憩終了"];
 
   // 出勤か退勤の分岐管理
@@ -26,11 +25,12 @@ export const TopLogicComponent = () => {
    * ・hooks層を呼び出す
    * ・attendanceStatusにwork_startを渡す
    */
-  const branchAttendanceStatus = (status: AttendanceType) => {
-    if(status === "出勤") {
+  const branchAttendanceStatus = (status: "work_start" | "work_finish") => {
+    setAttendanceStatus(status);
+
+    if(attendanceStatus === "work_start") {
       workStartHook.mutate();
-      setAttendanceStatus("work_start");
-    } else if(status === "退勤") {
+    } else if(attendanceStatus === "work_finish") {
 
     }
   };
@@ -45,10 +45,8 @@ export const TopLogicComponent = () => {
         height: "100vh"
       }}>
       <StampButtons
-        attendanceArray={attendanceArray}
         breakArray={breakArray}
-        branchAttendanceStatus={branchAttendanceStatus}
-        attendanceStatus={attendanceStatus} />
+        branchAttendanceStatus={branchAttendanceStatus} />
     </Box>
   )
 };

@@ -8,10 +8,8 @@ import { useRouter } from "next/navigation";
 
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
-  attendanceArray,
   breakArray,
-  branchAttendanceStatus,
-  attendanceStatus
+  branchAttendanceStatus
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();
@@ -30,20 +28,27 @@ export const StampButtons = ({
         sx={{
           alignItems: "center"
         }}>
-        {attendanceArray.map((item) => (
-          <Button
-            key={item}
-            variant="contained"
-            onClick={() => branchAttendanceStatus(item)}
-            sx={{
-              width: "300px",
-              height: "200px",
-              fontSize: "30px",
-              bgcolor: "#3399FF"
-            }}>
-            {item}
-          </Button>
-        ))}
+        <Button
+          variant="contained"
+          onClick={() => branchAttendanceStatus("work_start")}
+          sx={{
+            width: "300px",
+            height: "200px",
+            fontSize: "30px",
+            bgcolor: "#3399FF"
+          }}>
+          出勤
+        </Button>
+        <Button
+          variant="contained"
+          sx={{
+            width: "300px",
+            height: "200px",
+            fontSize: "30px",
+            bgcolor: "#3399FF"
+          }}>
+          退勤
+        </Button>
       </Stack>
 
       <Stack
