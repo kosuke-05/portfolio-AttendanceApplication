@@ -15,5 +15,6 @@ app.use(express.json());
 // ルーティング定義
 app.use("/user/post", userRouter);
 app.use("/attendance/work_start", attendanceRouter);
+app.use("/attendance/work_finish", attendanceRouter);
 
 export default app;

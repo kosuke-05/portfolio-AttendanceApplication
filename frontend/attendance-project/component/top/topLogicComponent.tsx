@@ -2,21 +2,22 @@
 
 import Box from "@mui/material/Box";
 import { StampButtons } from "./stampButtons";
-import { AttendanceType, BreakStartEndType } from "@/types/top/topTypes";
 import { useState } from "react";
-import { AttendancePostHook } from "@/hooks/attendance/attendancePostHook";
+import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
+import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
+import { UserStore } from "@/stores/user/userStore";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
-  const breakArray: BreakStartEndType[] = ["休憩開始", "休憩終了"];
-
   // 出勤か退勤の分岐管理
   const [attendanceStatus, setAttendanceStatus] = useState<"work_start" | "work_finish" | "">("");
 
   /**
    * ①出勤時のhooks呼び出し
+   * ②退勤時のhooks呼び出し
    */
-  const workStartHook = AttendancePostHook();
+  const workStartHook = WorkStartPostHook();
+  const workFinishHook = WorkFinishPostHook();
 
   /**
    * 出勤・退勤ボタン押下後の処理
@@ -24,6 +25,9 @@ export const TopLogicComponent = () => {
    * ②出勤の場合、
    * ・hooks層を呼び出す
    * ・attendanceStatusにwork_startを渡す
+   *
+   * ●共通項
+   * ①ストアからattendanceStatusを取得して、オブジェクトのプロパティ値にtrueを渡す
    */
   const branchAttendanceStatus = (status: "work_start" | "work_finish") => {
     setAttendanceStatus(status);
@@ -31,7 +35,7 @@ export const TopLogicComponent = () => {
     if(attendanceStatus === "work_start") {
       workStartHook.mutate();
     } else if(attendanceStatus === "work_finish") {
-
+      workFinishHook.mutate();
     }
   };
 
@@ -45,7 +49,6 @@ export const TopLogicComponent = () => {
         height: "100vh"
       }}>
       <StampButtons
-        breakArray={breakArray}
         branchAttendanceStatus={branchAttendanceStatus} />
     </Box>
   )

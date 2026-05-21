@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
-  breakArray,
   branchAttendanceStatus
 }: ButtonsPropsType) => {
   // 画面遷移
@@ -16,6 +15,8 @@ export const StampButtons = ({
 
   // ストアから取得
   const loginUser = UserStore((state) => state.loginUser);
+  const attendanceStatusStore = UserStore((state) => state.attendanceStatus);
+  // const attendanceTime = UserStore((state) => state.attendanceTime);
 
   return (
     <Stack
@@ -31,6 +32,7 @@ export const StampButtons = ({
         <Button
           variant="contained"
           onClick={() => branchAttendanceStatus("work_start")}
+          disabled={attendanceStatusStore.work_start}
           sx={{
             width: "300px",
             height: "200px",
@@ -41,6 +43,10 @@ export const StampButtons = ({
         </Button>
         <Button
           variant="contained"
+          disabled={
+            !attendanceStatusStore.work_start ||
+            attendanceStatusStore.work_finish
+          }
           sx={{
             width: "300px",
             height: "200px",
@@ -54,18 +60,34 @@ export const StampButtons = ({
       <Stack
         direction="row"
         spacing={4}>
-        {breakArray.map((item) => (
-          <Button
-            key={item}
-            variant="contained"
-            sx={{
-              width: "300px",
-              height: "80px",
-              fontSize: "20px"
-            }}>
-            {item}
-          </Button>
-        ))}
+        <Button
+          variant="contained"
+          disabled={
+            !attendanceStatusStore.work_start ||
+            attendanceStatusStore.work_finish ||
+            attendanceStatusStore.break_start
+          }
+          sx={{
+            width: "300px",
+            height: "80px",
+            fontSize: "20px"
+          }}>
+          休憩開始
+        </Button>
+        <Button
+          variant="contained"
+          disabled={
+            !attendanceStatusStore.work_start ||
+            attendanceStatusStore.work_finish ||
+            !attendanceStatusStore.break_start
+          }
+          sx={{
+            width: "300px",
+            height: "80px",
+            fontSize: "20px"
+          }}>
+          休憩終了
+        </Button>
       </Stack>
       <Button
         variant="text"
