@@ -2,6 +2,7 @@
 
 import { UserStore } from "@/stores/user/userStore";
 import { ButtonsPropsType } from "@/types/top/topTypes";
+import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
@@ -16,7 +17,7 @@ export const StampButtons = ({
   // ストアから取得
   const loginUser = UserStore((state) => state.loginUser);
   const attendanceStatusStore = UserStore((state) => state.attendanceStatus);
-  // const attendanceTime = UserStore((state) => state.attendanceTime);
+  const workStart = UserStore((state) => state.attendanceTime.work_start);
 
   return (
     <Stack
@@ -39,7 +40,22 @@ export const StampButtons = ({
             fontSize: "30px",
             bgcolor: "#3399FF"
           }}>
-          出勤
+          <Stack
+            direction="column"
+            sx={{
+              alignItems: "center"
+            }}>
+            <Typography 
+              sx={{
+                fontSize: "30px",
+                fontWeight: "bold"
+              }}>
+              出勤
+            </Typography>
+            {workStart && (
+              <Typography variant="body2">{workStart}</Typography>
+            )}
+          </Stack>
         </Button>
         <Button
           variant="contained"

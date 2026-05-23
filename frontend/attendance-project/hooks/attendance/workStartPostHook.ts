@@ -12,6 +12,7 @@ export const WorkStartPostHook = () => {
 
   // ストアから取得
   const attendanceStatusStore = UserStore((state) => state.attendanceStatus);
+  const attendanceTime = UserStore((state) => state.attendanceTime);
 
   return useMutation({
     mutationFn: WorkStartPostApi,
@@ -21,6 +22,9 @@ export const WorkStartPostHook = () => {
 
       // ストアのwork_startをtrueにする
       attendanceStatusStore.work_start = true;
+
+      // 出勤時刻をストアに渡す
+      attendanceTime.work_start = res.result.work_start;
 
       // トークンを渡す
       setToken(res.token);
