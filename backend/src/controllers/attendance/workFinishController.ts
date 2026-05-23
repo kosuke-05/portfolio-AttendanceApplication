@@ -1,10 +1,9 @@
 import type { Request, Response } from "express";
-import { attendancePostService } from "../../services/attendance/attendancePostService.js";
+import { workFinishService } from "../../services/attendance/workFinishService.js";
 
-
-export const attendancePostController = async (req: Request, res: Response) => {
+export const workFinishController = async (req: Request, res: Response) => {
   try {
-    await attendancePostService();
+    await workFinishService();
 
     // 有効である場合
     return res.status(200).json({
@@ -16,4 +15,4 @@ export const attendancePostController = async (req: Request, res: Response) => {
       message: "Server Error"
     });
   };
-};
+}
