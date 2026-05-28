@@ -18,6 +18,8 @@ export const StampButtons = ({
   const loginUser = UserStore((state) => state.loginUser);
   const attendanceStatusStore = UserStore((state) => state.attendanceStatus);
   const workStart = UserStore((state) => state.attendanceTime.work_start);
+  const workFinish = UserStore((state) => state.attendanceTime.work_finish);
+  const breakStart = UserStore((state) => state.attendanceTime.break_start);
 
   return (
     <Stack
@@ -63,13 +65,29 @@ export const StampButtons = ({
             !attendanceStatusStore.work_start ||
             attendanceStatusStore.work_finish
           }
+          onClick={() => branchAttendanceStatus("work_finish")}
           sx={{
             width: "300px",
             height: "200px",
             fontSize: "30px",
             bgcolor: "#3399FF"
           }}>
-          退勤
+          <Stack
+            direction="column"
+            sx={{
+              alignItems: "center"
+            }}>
+            <Typography 
+              sx={{
+                fontSize: "30px",
+                fontWeight: "bold"
+              }}>
+              退勤
+            </Typography>
+            {workFinish && (
+              <Typography variant="body2">{workFinish}</Typography>
+            )}
+          </Stack>
         </Button>
       </Stack>
 
@@ -88,7 +106,22 @@ export const StampButtons = ({
             height: "80px",
             fontSize: "20px"
           }}>
-          休憩開始
+          <Stack
+            direction="column"
+            sx={{
+              alignItems: "center"
+            }}>
+            <Typography 
+              sx={{
+                fontSize: "20px",
+                fontWeight: "bold"
+              }}>
+              休憩開始
+            </Typography>
+            {breakStart && (
+              <Typography variant="body2">{breakStart}</Typography>
+            )}
+          </Stack>
         </Button>
         <Button
           variant="contained"
@@ -102,7 +135,20 @@ export const StampButtons = ({
             height: "80px",
             fontSize: "20px"
           }}>
-          休憩終了
+          <Stack
+            direction="column"
+            sx={{
+              alignItems: "center"
+            }}>
+            <Typography
+              sx={{
+                fontSize: "20px",
+                fontWeight: "bold"
+              }}>
+              休憩終了
+            </Typography>
+            
+          </Stack>
         </Button>
       </Stack>
       <Button

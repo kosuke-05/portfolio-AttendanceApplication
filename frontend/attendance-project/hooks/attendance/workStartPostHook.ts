@@ -11,8 +11,9 @@ export const WorkStartPostHook = () => {
   const queryClient = useQueryClient();
 
   // ストアから取得
-  const attendanceStatusStore = UserStore((state) => state.attendanceStatus);
-  const attendanceTime = UserStore((state) => state.attendanceTime);
+  const setAttendanceStatus = UserStore((state) => state.setAttendanceStatus);
+  const setAttendanceTime = UserStore((state) => state.setAttendanceTime);
+  const setOverLimitTime = UserStore((state) => state.setOverLimitTime);
 
   return useMutation({
     mutationFn: WorkStartPostApi,
@@ -20,11 +21,9 @@ export const WorkStartPostHook = () => {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["attendance"] });
 
-      // ストアのwork_startをtrueにする
-      attendanceStatusStore.work_start = true;
-
-      // 出勤時刻をストアに渡す
-      attendanceTime.work_start = res.result.work_start;
+      setAttendanceStatus("work_start", true);
+      setAttendanceTime("work_start", res.attendance);
+      setOverLimitTime("work_start", res.isLate);
 
       // トークンを渡す
       setToken(res.token);

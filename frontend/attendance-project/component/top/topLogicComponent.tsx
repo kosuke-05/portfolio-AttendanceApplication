@@ -5,12 +5,13 @@ import { StampButtons } from "./stampButtons";
 import { useState } from "react";
 import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
 import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
-import { UserStore } from "@/stores/user/userStore";
+import { AttendanceStatusType } from "@/types/top/topTypes";
+import { BreakStartPostHook } from "@/hooks/attendance/breakStartPostHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
   // 出勤か退勤の分岐管理
-  const [attendanceStatus, setAttendanceStatus] = useState<"work_start" | "work_finish" | "">("");
+  const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatusType | "">("");
 
   /**
    * ①出勤時のhooks呼び出し
@@ -18,6 +19,7 @@ export const TopLogicComponent = () => {
    */
   const workStartHook = WorkStartPostHook();
   const workFinishHook = WorkFinishPostHook();
+  const breakStartHook = BreakStartPostHook();
 
   /**
    * 出勤・退勤ボタン押下後の処理
@@ -29,13 +31,17 @@ export const TopLogicComponent = () => {
    * ●共通項
    * ①ストアからattendanceStatusを取得して、オブジェクトのプロパティ値にtrueを渡す
    */
-  const branchAttendanceStatus = (status: "work_start" | "work_finish") => {
+  const branchAttendanceStatus = (status: AttendanceStatusType) => {
     setAttendanceStatus(status);
 
     if(attendanceStatus === "work_start") {
       workStartHook.mutate();
     } else if(attendanceStatus === "work_finish") {
       workFinishHook.mutate();
+    } else if(attendanceStatus === "break_start") {
+      breakStartHook.mutate();
+    } else if(attendanceStatus === "break_finish") {
+
     }
   };
 

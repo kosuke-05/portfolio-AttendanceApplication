@@ -6,12 +6,13 @@ export const workStartController = async (req: Request, res: Response) => {
     // どのユーザーのトークンかを判別
     const userId = req.user?.userId;
 
-    const result = await workStartService(userId!);
+    const { attendance, isLate } = await workStartService(userId!);
 
     // 有効である場合
     return res.status(200).json({
       message: "出勤登録完了",
-      result
+      attendance,
+      isLate
     });
 
   } catch(err) {
