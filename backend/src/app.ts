@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import userRouter from "./routes/user/route.js";
 import workFinishRouter from "./routes/attendance/workFinishRoute.js";
-import workStartRouter from "./routes/attendance/workStartroute.js";
+import workStartRouter from "./routes/attendance/workStartRoute.js";
+import breakStartRouter from "./routes/attendance/breakStartRoute.js";
 
 // Expressの設定ファイル
 export const app = express();
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use("/user/post", userRouter);
 app.use("/attendance/work_start", workStartRouter);
 app.use("/attendance/work_finish", workFinishRouter);
+app.use("/attendance/break_start", breakStartRouter);
 
 export default app;

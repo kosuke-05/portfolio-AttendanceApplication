@@ -3,11 +3,12 @@ import { workFinishService } from "../../services/attendance/workFinishService.j
 
 export const workFinishController = async (req: Request, res: Response) => {
   try {
-    await workFinishService();
+    const time = await workFinishService();
 
     // 有効である場合
     return res.status(200).json({
-      message: "出勤登録完了"
+      message: "出勤登録完了",
+      time
     });
 
   } catch(err) {
