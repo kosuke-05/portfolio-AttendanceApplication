@@ -2,7 +2,6 @@
 
 import { UserStoreType } from "@/types/store/userStoreType";
 import { UserTypeAddId } from "@/types/user/userType";
-import { isValueExpired } from "next/dist/client/components/segment-cache/cache-map";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

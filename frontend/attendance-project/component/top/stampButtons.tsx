@@ -2,7 +2,7 @@
 
 import { UserStore } from "@/stores/user/userStore";
 import { ButtonsPropsType } from "@/types/top/topTypes";
-import { Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,7 @@ export const StampButtons = ({
   const workStart = UserStore((state) => state.attendanceTime.work_start);
   const workFinish = UserStore((state) => state.attendanceTime.work_finish);
   const breakStart = UserStore((state) => state.attendanceTime.break_start);
+  const breakFinish = UserStore((state) => state.attendanceTime.break_finish);
 
   return (
     <Stack
@@ -101,6 +102,7 @@ export const StampButtons = ({
             attendanceStatusStore.work_finish ||
             attendanceStatusStore.break_start
           }
+          onClick={() => branchAttendanceStatus("break_start")}
           sx={{
             width: "300px",
             height: "80px",
@@ -130,6 +132,7 @@ export const StampButtons = ({
             attendanceStatusStore.work_finish ||
             !attendanceStatusStore.break_start
           }
+          onClick={() => branchAttendanceStatus("break_finish")}
           sx={{
             width: "300px",
             height: "80px",
@@ -147,7 +150,9 @@ export const StampButtons = ({
               }}>
               休憩終了
             </Typography>
-            
+            {breakFinish && (
+              <Typography variant="body2">{breakFinish}</Typography>
+            )}
           </Stack>
         </Button>
       </Stack>
@@ -160,6 +165,9 @@ export const StampButtons = ({
         }}>
         新規登録が未完了の方はこちら
       </Button>
+      <Box component="div">
+        
+      </Box>
     </Stack>
   )
 };
