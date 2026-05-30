@@ -7,6 +7,7 @@ import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
 import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
 import { AttendanceStatusType } from "@/types/top/topTypes";
 import { BreakStartPostHook } from "@/hooks/attendance/breakStartPostHook";
+import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -20,6 +21,7 @@ export const TopLogicComponent = () => {
   const workStartHook = WorkStartPostHook();
   const workFinishHook = WorkFinishPostHook();
   const breakStartHook = BreakStartPostHook();
+  const breakFinishHook = BreakFinishPostHook();
 
   /**
    * 出勤・退勤ボタン押下後の処理
@@ -41,7 +43,7 @@ export const TopLogicComponent = () => {
     } else if(attendanceStatus === "break_start") {
       breakStartHook.mutate();
     } else if(attendanceStatus === "break_finish") {
-
+      breakFinishHook.mutate();
     }
   };
 
