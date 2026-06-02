@@ -4,6 +4,7 @@ import userRouter from "./routes/user/route.js";
 import workFinishRouter from "./routes/attendance/workFinishRoute.js";
 import workStartRouter from "./routes/attendance/workStartRoute.js";
 import breakStartRouter from "./routes/attendance/breakStartRoute.js";
+import lateWorkStartRouter from "./routes/late/workStartRoute.js";
 
 // Expressの設定ファイル
 export const app = express();
@@ -19,5 +20,6 @@ app.use("/user/post", userRouter);
 app.use("/attendance/work_start", workStartRouter);
 app.use("/attendance/work_finish", workFinishRouter);
 app.use("/attendance/break_start", breakStartRouter);
+app.use("/attendance/work_start/late", lateWorkStartRouter);
 
 export default app;
