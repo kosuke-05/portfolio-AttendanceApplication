@@ -2,7 +2,7 @@
 
 import { LateValidation } from "@/schemas/attendance/lateSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import zod from "zod";
 
 // スキーマとの同期
@@ -21,6 +21,11 @@ export const LateTextField = () => {
   });
 
   return (
-    
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit()}>
+        <Controller
+          name
+      </form>
+    </FormProvider>
   )
 };
