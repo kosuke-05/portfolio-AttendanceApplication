@@ -6,10 +6,12 @@ import { Box, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
+import { LateTextField } from "../lateTextField/lateTextField";
 
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
-  branchAttendanceStatus
+  branchAttendanceStatus,
+  lateReasonSubmit
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();
@@ -165,8 +167,15 @@ export const StampButtons = ({
         }}>
         新規登録が未完了の方はこちら
       </Button>
-      <Box component="div">
-        
+
+      {/** 遅刻理由記入のフィールド */}
+      <Box
+        component="div"
+        sx={{
+          width: "632px"
+        }}>
+        <LateTextField
+          lateReasonSubmit={lateReasonSubmit} />
       </Box>
     </Stack>
   )

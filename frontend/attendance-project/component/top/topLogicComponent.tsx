@@ -8,6 +8,8 @@ import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
 import { AttendanceStatusType } from "@/types/top/topTypes";
 import { BreakStartPostHook } from "@/hooks/attendance/breakStartPostHook";
 import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
+import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
+import { SubmitHandler } from "react-hook-form";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -22,7 +24,7 @@ export const TopLogicComponent = () => {
   const workFinishHook = WorkFinishPostHook();
   const breakStartHook = BreakStartPostHook();
   const breakFinishHook = BreakFinishPostHook();
-
+  const lateWorkStartHook = LateWorkStartPostHook();
   /**
    * 出勤・退勤ボタン押下後の処理
    * ①出勤・退勤いずれかによって処理を分岐
@@ -47,6 +49,11 @@ export const TopLogicComponent = () => {
     }
   };
 
+  // 遅刻理由記入後の送信処理
+  const lateReasonSubmit: SubmitHandler<string> = (lateReason) => {
+    lateWorkStartHook.mutate(lateReason);
+  }
+
   return (
     <Box
       component="div"
@@ -57,7 +64,8 @@ export const TopLogicComponent = () => {
         height: "100vh"
       }}>
       <StampButtons
-        branchAttendanceStatus={branchAttendanceStatus} />
+        branchAttendanceStatus={branchAttendanceStatus}
+        lateReasonSubmit={lateReasonSubmit} />
     </Box>
   )
 };
