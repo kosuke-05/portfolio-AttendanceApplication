@@ -16,4 +16,4 @@ export const LateReasonSubmitButton = () => {
       記入内容を送信
     </Button>
   )
-}
+};

@@ -29,6 +29,16 @@ export const UserStore = create<UserStoreType>()(
             [key]: value
           }
         })),
+      
+      resetAttendanceStatus: () =>
+        set(() => ({
+          attendanceStatus: {
+            work_start: false,
+            work_finish: false,
+            break_start: false,
+            break_finish: false
+          }
+        })),
 
       attendanceTime: {
         work_start: "",
@@ -48,6 +58,16 @@ export const UserStore = create<UserStoreType>()(
           }
         })),
 
+        resetAttendanceTime: () =>
+          set(() => ({
+            attendanceTime: {
+              work_start: "",
+              work_finish: "",
+              break_start: "",
+              break_finish: ""
+            }
+          })),
+
       overLimitTime: {
         work_start: false,
         work_finish: false,
@@ -63,6 +83,16 @@ export const UserStore = create<UserStoreType>()(
           overLimitTime: {
             ...state.overLimitTime,
             [key]: value
+          }
+        })),
+
+      resetOverLimitTime: () =>
+        set(() => ({
+          overLimitTime: {
+            work_start: false,
+            work_finish: false,
+            break_start: false,
+            break_finish: false
           }
         }))
     }),

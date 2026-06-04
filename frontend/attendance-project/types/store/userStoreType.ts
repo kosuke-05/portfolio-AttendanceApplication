@@ -20,6 +20,8 @@ export type UserStoreType = {
 
   setAttendanceStatus: (key: AttendanceKey, value: boolean) => void,
 
+  resetAttendanceStatus: () => void,
+
   // 出勤・退勤・休憩の時刻
   attendanceTime: {
     work_start: string,
@@ -30,6 +32,8 @@ export type UserStoreType = {
 
   setAttendanceTime: (key: AttendanceKey, value: string) => void,
 
+  resetAttendanceTime: () => void,
+
   // 規定の勤怠時刻を超過している場合の判定結果
   overLimitTime: {
     work_start: boolean,
@@ -38,5 +42,7 @@ export type UserStoreType = {
     break_finish: boolean
   },
 
-  setOverLimitTime: (key: AttendanceKey, value: boolean) => void
+  setOverLimitTime: (key: AttendanceKey, value: boolean) => void,
+
+  resetOverLimitTime: () => void
 };
