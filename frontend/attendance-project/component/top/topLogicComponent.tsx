@@ -5,11 +5,12 @@ import { StampButtons } from "./stampButtons";
 import { useState } from "react";
 import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
 import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
-import { AttendanceStatusType } from "@/types/top/topTypes";
+import { AttendanceStatusType, LateTextFieldPropsType, LateType } from "@/types/top/topTypes";
 import { BreakStartPostHook } from "@/hooks/attendance/breakStartPostHook";
 import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
 import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
 import { SubmitHandler } from "react-hook-form";
+import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -25,6 +26,8 @@ export const TopLogicComponent = () => {
   const breakStartHook = BreakStartPostHook();
   const breakFinishHook = BreakFinishPostHook();
   const lateWorkStartHook = LateWorkStartPostHook();
+  const lateWorkFinishHook = LateWorkFinishPostHook();
+
   /**
    * 出勤・退勤ボタン押下後の処理
    * ①出勤・退勤いずれかによって処理を分岐
@@ -38,21 +41,25 @@ export const TopLogicComponent = () => {
   const branchAttendanceStatus = (status: AttendanceStatusType) => {
     setAttendanceStatus(status);
 
-    if(attendanceStatus === "work_start") {
+    if(status === "work_start") {
       workStartHook.mutate();
-    } else if(attendanceStatus === "work_finish") {
+    } else if(status === "work_finish") {
       workFinishHook.mutate();
-    } else if(attendanceStatus === "break_start") {
+    } else if(status === "break_start") {
       breakStartHook.mutate();
-    } else if(attendanceStatus === "break_finish") {
+    } else if(status === "break_finish") {
       breakFinishHook.mutate();
     }
   };
 
   // 遅刻理由記入後の送信処理
-  const lateReasonSubmit: SubmitHandler<string> = (lateReason) => {
-    lateWorkStartHook.mutate(lateReason);
-  }
+  const lateReasonSubmit: SubmitHandler<LateType> = (lateReason) => {
+    if(attendanceStatus === "work_start") {
+      lateWorkStartHook.mutate(lateReason);
+    } else if(attendanceStatus === "work_finish") {
+      lateWorkFinishHook.mutate(lateReason);
+    }
+  };
 
   return (
     <Box
@@ -65,7 +72,8 @@ export const TopLogicComponent = () => {
       }}>
       <StampButtons
         branchAttendanceStatus={branchAttendanceStatus}
-        lateReasonSubmit={lateReasonSubmit} />
+        lateReasonSubmit={lateReasonSubmit}
+        attendanceStatus={attendanceStatus} />
     </Box>
   )
 };

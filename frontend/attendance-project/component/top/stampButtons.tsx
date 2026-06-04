@@ -2,7 +2,7 @@
 
 import { UserStore } from "@/stores/user/userStore";
 import { ButtonsPropsType } from "@/types/top/topTypes";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,8 @@ import { LateTextField } from "../lateTextField/lateTextField";
 // 打刻ボタンを表示するコンポーネント
 export const StampButtons = ({
   branchAttendanceStatus,
-  lateReasonSubmit
+  lateReasonSubmit,
+  attendanceStatus
 }: ButtonsPropsType) => {
   // 画面遷移
   const router = useRouter();
@@ -23,6 +24,7 @@ export const StampButtons = ({
   const workFinish = UserStore((state) => state.attendanceTime.work_finish);
   const breakStart = UserStore((state) => state.attendanceTime.break_start);
   const breakFinish = UserStore((state) => state.attendanceTime.break_finish);
+  const overLimitTime = UserStore((state) => state.overLimitTime);
 
   return (
     <Stack
@@ -50,7 +52,7 @@ export const StampButtons = ({
             sx={{
               alignItems: "center"
             }}>
-            <Typography 
+            <Typography
               sx={{
                 fontSize: "30px",
                 fontWeight: "bold"
@@ -169,12 +171,26 @@ export const StampButtons = ({
       </Button>
 
       {/** 遅刻理由記入のフィールド */}
+      {overLimitTime.work_start && (
+        <Box
+          component="div"
+          sx={{
+            width: "632px"
+          }}>
+          <LateTextField
+            value={attendanceStatus}
+            lateReasonSubmit={lateReasonSubmit} />
+        </Box>
+      )}
+
+      {/** 退勤時刻超過のフィールド */}
       <Box
         component="div"
         sx={{
           width: "632px"
         }}>
         <LateTextField
+          value={attendanceStatus}
           lateReasonSubmit={lateReasonSubmit} />
       </Box>
     </Stack>
