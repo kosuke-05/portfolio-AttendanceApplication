@@ -13,6 +13,7 @@ export const WorkFinishPostHook = () => {
   const setAttendanceStatus = UserStore((state) => state.setAttendanceStatus);
   const setAttendanceTime = UserStore((state) => state.setAttendanceTime);
   const setOverLimitTime = UserStore((state) => state.setOverLimitTime);
+  const setAlertMessage = UserStore((state) => state.setAlertMessage);
 
   return useMutation({
     mutationFn: WorkFinishPostApi,
@@ -23,6 +24,7 @@ export const WorkFinishPostHook = () => {
       setAttendanceStatus("work_finish", true);
       setAttendanceTime("work_finish", res.attendance);
       setOverLimitTime("work_finish", res.isLate);
+      setAlertMessage(res.message);
 
       // トークンを渡す
       setToken(res.token);

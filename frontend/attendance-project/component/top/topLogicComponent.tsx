@@ -11,10 +11,14 @@ import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
 import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
 import { SubmitHandler } from "react-hook-form";
 import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
+import { SnackBarComponent } from "./snackBarComponent";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
-  // 出勤か退勤の分岐管理
+  /**
+   * 出勤か退勤の分岐管理
+   * 注意：初期値をwork_startにすると他で不具合になるため空文字のままにする
+   */
   const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatusType | "">("");
 
   /**
@@ -62,18 +66,23 @@ export const TopLogicComponent = () => {
   };
 
   return (
-    <Box
-      component="div"
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh"
-      }}>
-      <StampButtons
-        branchAttendanceStatus={branchAttendanceStatus}
-        lateReasonSubmit={lateReasonSubmit}
-        attendanceStatus={attendanceStatus} />
-    </Box>
+    <>
+      <Box
+        component="div"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh"
+        }}>
+        <StampButtons
+          branchAttendanceStatus={branchAttendanceStatus}
+          lateReasonSubmit={lateReasonSubmit}
+          attendanceStatus={attendanceStatus} />
+      </Box>
+
+      {/** ボタン押下後に処理が成功した際にスナックバーを表示 */}
+      <SnackBarComponent />
+    </>
   )
 };

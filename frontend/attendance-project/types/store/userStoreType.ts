@@ -44,5 +44,10 @@ export type UserStoreType = {
 
   setOverLimitTime: (key: AttendanceKey, value: boolean) => void,
 
-  resetOverLimitTime: () => void
+  resetOverLimitTime: () => void,
+
+  // 出勤・退勤・休憩開始・休憩終了のどれか最新メッセージを管理
+  alertMessage: string,
+
+  setAlertMessage: (message: string) => void
 };
