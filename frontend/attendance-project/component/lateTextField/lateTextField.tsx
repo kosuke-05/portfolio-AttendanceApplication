@@ -17,24 +17,23 @@ export const LateTextField = ({
     mode: "onChange",
     resolver: zodResolver(LateValidation),
     defaultValues: {
-      lateWorkStart: ""
+      lateWorkStart: "",
+      lateWorkFinish: ""
     }
   });
 
   // value値の判定結果
-  let result: string;
-  if(value === "work_start") {
-    result = "出勤"
-  } else if(value === "work_finish") {
-    result = "退勤"
-  };
+  let result: string = value === "work_start" ? "出勤" : "退勤";
+
+  // value値によってControllerのname属性値を変える
+  let nameValue: keyof LateType = value === "work_start" ? "lateWorkStart" : "lateWorkFinish";
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(lateReasonSubmit)}>
         <Stack direction="column" spacing={2}>
           <Controller
-            name="lateWorkStart"
+            name={nameValue}
             control={methods.control}
             render={({ field, fieldState }) => (
               <TextField

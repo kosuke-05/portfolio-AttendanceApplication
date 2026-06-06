@@ -2,6 +2,7 @@
 
 import { UserStoreType } from "@/types/store/userStoreType";
 import { UserTypeAddId } from "@/types/user/userType";
+import { string } from "zod";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -94,7 +95,11 @@ export const UserStore = create<UserStoreType>()(
             break_start: false,
             break_finish: false
           }
-        }))
+        })),
+
+      alertMessage: "",
+
+      setAlertMessage: (message: string) => set({ alertMessage: message })
     }),
     {
       name: "user-storage",

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { LateTextField } from "../lateTextField/lateTextField";
 
 // 打刻ボタンを表示するコンポーネント
-export const StampButtons = ({
+export const  StampButtons = ({
   branchAttendanceStatus,
   lateReasonSubmit,
   attendanceStatus
@@ -184,15 +184,17 @@ export const StampButtons = ({
       )}
 
       {/** 退勤時刻超過のフィールド */}
-      <Box
-        component="div"
-        sx={{
-          width: "632px"
-        }}>
-        <LateTextField
-          value={attendanceStatus}
-          lateReasonSubmit={lateReasonSubmit} />
-      </Box>
+      {overLimitTime.work_finish && (
+        <Box
+          component="div"
+          sx={{
+            width: "632px"
+          }}>
+          <LateTextField
+            value={attendanceStatus}
+            lateReasonSubmit={lateReasonSubmit} />
+        </Box>
+      )}
     </Stack>
   )
 };
