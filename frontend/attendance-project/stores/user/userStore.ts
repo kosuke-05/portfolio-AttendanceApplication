@@ -1,6 +1,6 @@
 "use client"
 
-import { UserStoreType } from "@/types/store/userStoreType";
+import { AlertMessageType, UserStoreType } from "@/types/store/userStoreType";
 import { UserTypeAddId } from "@/types/user/userType";
 import { string } from "zod";
 import { create } from "zustand";
@@ -97,9 +97,12 @@ export const UserStore = create<UserStoreType>()(
           }
         })),
 
-      alertMessage: "",
+      alertMessage: {
+        result: "",
+        message: ""
+      },
 
-      setAlertMessage: (message: string) => set({ alertMessage: message })
+      setAlertMessage: (message: AlertMessageType) => set({ alertMessage: message })
     }),
     {
       name: "user-storage",

@@ -4,6 +4,12 @@ import { UserTypeAddId } from "../user/userType"
 
 type AttendanceKey = "work_start" | "work_finish" | "break_start" | "break_finish";
 
+// alertMessageの型
+export type AlertMessageType = {
+  result: "success" | "error" | "",
+  message: string
+};
+
 // ストアで使用する型
 export type UserStoreType = {
   loginUser: UserTypeAddId | null,
@@ -47,7 +53,7 @@ export type UserStoreType = {
   resetOverLimitTime: () => void,
 
   // 出勤・退勤・休憩開始・休憩終了のどれか最新メッセージを管理
-  alertMessage: string,
+  alertMessage: AlertMessageType,
 
-  setAlertMessage: (message: string) => void
+  setAlertMessage: (message: AlertMessageType) => void
 };

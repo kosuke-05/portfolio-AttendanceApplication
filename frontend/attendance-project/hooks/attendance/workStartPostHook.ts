@@ -25,10 +25,20 @@ export const WorkStartPostHook = () => {
       setAttendanceStatus("work_start", true);
       setAttendanceTime("work_start", res.attendance);
       setOverLimitTime("work_start", res.isLate);
-      setAlertMessage(res.message);
+      setAlertMessage({
+        result: "success",
+        message: res.message
+      });
 
       // トークンを渡す
       setToken(res.token);
+    },
+
+    onError: (res) => {
+      setAlertMessage({
+        result: "error",
+        message: res.message
+      })
     }
   });
 };
