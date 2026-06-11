@@ -8,24 +8,24 @@ export const SnackBarComponent = () => {
   // ストアから取得
   // 空文字（falsyな値）じゃなかった場合、snackbarを表示
   const alertMessage = UserStore((state) => state.alertMessage);
+  const resetAlertMessage = UserStore((state) => state.resetAlertMessage);
 
   return (
     <>
-      {alertMessage && (
-        <Snackbar
-          open={
-            alertMessage.result === "success" || alertMessage.result === "error"
-          }
-          autoHideDuration={3000}
-          message={alertMessage.message}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "center"
-          }}>
-          <Alert
-            severity={alertMessage.result === "success" ? "success" : "error"} />
-        </Snackbar>
-      )}
+      <Snackbar
+        open={
+          alertMessage.result === "success" || alertMessage.result === "error"
+        }
+        autoHideDuration={3000}
+        message={alertMessage.message}
+        onClose={resetAlertMessage}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}>
+        <Alert
+          severity={alertMessage.result === "success" ? "success" : "error"} />
+      </Snackbar>
     </>
   )
 };

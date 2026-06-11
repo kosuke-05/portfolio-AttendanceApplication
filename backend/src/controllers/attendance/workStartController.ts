@@ -10,7 +10,7 @@ export const workStartController = async (req: Request, res: Response) => {
 
     // 有効である場合
     return res.status(200).json({
-      message: "出勤登録完了",
+      message: "出勤時刻の登録完了",
       attendance,
       isLate
     });
