@@ -55,5 +55,7 @@ export type UserStoreType = {
   // 出勤・退勤・休憩開始・休憩終了のどれか最新メッセージを管理
   alertMessage: AlertMessageType,
 
-  setAlertMessage: (message: AlertMessageType) => void
+  setAlertMessage: (message: AlertMessageType) => void,
+
+  resetAlertMessage: () => void
 };

@@ -2,7 +2,6 @@
 
 import { AlertMessageType, UserStoreType } from "@/types/store/userStoreType";
 import { UserTypeAddId } from "@/types/user/userType";
-import { string } from "zod";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -102,7 +101,15 @@ export const UserStore = create<UserStoreType>()(
         message: ""
       },
 
-      setAlertMessage: (message: AlertMessageType) => set({ alertMessage: message })
+      setAlertMessage: (message: AlertMessageType) => set({ alertMessage: message }),
+
+      resetAlertMessage: () =>
+        set(() => ({
+          alertMessage: {
+            result: "",
+            message: ""
+          }
+        }))
     }),
     {
       name: "user-storage",

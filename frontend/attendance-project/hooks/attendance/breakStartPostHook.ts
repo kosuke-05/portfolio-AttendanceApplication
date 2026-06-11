@@ -12,6 +12,7 @@ export const BreakStartPostHook = () => {
   // ストアから取得
   const setAttendanceStatus = UserStore((state) => state.setAttendanceStatus);
   const setAttendanceTime = UserStore((state) => state.setAttendanceTime);
+  const setAlertMessage = UserStore((state) => state.setAlertMessage);
 
   return useMutation({
     mutationFn: BreakStartPostApi,
@@ -21,6 +22,18 @@ export const BreakStartPostHook = () => {
 
       setAttendanceStatus("break_start", true);
       setAttendanceTime("break_start", res.time);
+
+      setAlertMessage({
+        result: "success",
+        message: res.message
+      })
+    },
+
+    onError: (res) => {
+      setAlertMessage({
+        result: "error",
+        message: res.message
+      })
     }
   })
 }

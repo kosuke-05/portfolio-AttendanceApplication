@@ -7,7 +7,7 @@ export const breakFinishController = async (req: Request, res: Response) => {
     const time = await breakFinishService();
 
     return res.status(200).json({
-      message: "休憩時間終了登録完了",
+      message: "休憩終了時刻の登録完了",
       time
     })
   } catch(err) {
