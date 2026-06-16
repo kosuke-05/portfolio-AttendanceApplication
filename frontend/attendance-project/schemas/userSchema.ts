@@ -36,3 +36,21 @@ export const UserValidations = zod.object({
       }
     )
 });
+
+// ログイン時のメールアドレス・パスワード入力
+export const LoginValidation = zod.object({
+  mailAddress:
+    zod
+    .email({
+      message: "アドレスの形式に誤りがあります。"
+    }),
+
+  password:
+    zod
+    .string()
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/, {
+        message: "8桁以上、小文字・大文字・数字を含めてください。"
+      }
+    )
+})

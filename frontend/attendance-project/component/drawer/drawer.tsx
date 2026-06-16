@@ -1,6 +1,6 @@
 "use client"
 
-import { Drawer2LayersType, DrawerMenuType } from '@/types/drawer/drawerType';
+import { DrawerMenuType } from '@/types/drawer/drawerType';
 import Drawer from '@mui/material/Drawer';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -14,6 +14,7 @@ import Collapse from '@mui/material/Collapse';
 import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import { UserStore } from '@/stores/user/userStore';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // ドロワーメニュー
 export const DrawerComponent = () => {
@@ -42,12 +43,14 @@ export const DrawerComponent = () => {
   const DrawerMenu: DrawerMenuType[] = [
     {name: "ホーム", value: "home", icon: <HomeIcon />, onClick: () => {router.push("/")}},
     {name: `${userName} さん`, value: "user", icon: <AccountCircleIcon />},
-    {name: "ログイン", value: "login", icon: <LoginIcon />}
+    ...(loginUser
+      ? [{name: "ログアウト", value: "logout", onClick: () => logout(), icon: <LogoutIcon />}]
+      : [{name: "ログイン", value: "login", icon: <LoginIcon />}]
+    )
   ];
 
-  const Drawer2LayersMenu: Drawer2LayersType[] = [
+  const Drawer2LayersMenu: DrawerMenuType[] = [
     {name: "勤怠情報", value: "attendanceInformation", onClick: () => {router.push("/attendanceInformation")}},
-    {name: "ログアウト", value: "logout", onClick: () => logout()}
   ];
 
   return (
