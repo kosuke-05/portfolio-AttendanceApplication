@@ -17,3 +17,18 @@ export const LateReasonSubmitButton = () => {
     </Button>
   )
 };
+
+// ログイン情報入力後に送信するボタン
+export const LoginSubmitButton = () => {
+  // RHFを取得
+  const { formState: {isDirty, isValid}} = useFormContext();
+
+  return (
+    <Button
+      variant="contained"
+      type="submit"
+      disabled={!isDirty || !isValid}>
+      ログイン情報を送信
+    </Button>
+  )
+};

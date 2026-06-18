@@ -57,5 +57,10 @@ export type UserStoreType = {
 
   setAlertMessage: (message: AlertMessageType) => void,
 
-  resetAlertMessage: () => void
+  resetAlertMessage: () => void,
+
+  // ドロワーメニューのログイン押下後にダイアログを表示
+  loginDialog: boolean,
+
+  setLoginDialog: (bool: boolean) => void
 };

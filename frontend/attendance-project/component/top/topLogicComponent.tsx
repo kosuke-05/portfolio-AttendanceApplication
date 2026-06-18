@@ -12,6 +12,8 @@ import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
 import { SubmitHandler } from "react-hook-form";
 import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
 import { SnackBarComponent } from "./snackBarComponent";
+import { LoginDialog } from "../user/login/loginDialog";
+import { LoginUserType } from "@/types/user/userType";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -65,6 +67,17 @@ export const TopLogicComponent = () => {
     }
   };
 
+  /**
+   * ログイン情報入力後の処理
+   * ①hooksにメールアドレス・パスワードを渡す
+   * ②API通信開始
+   * ③バックエンド側に渡されたメールアドレス・パスワードがDBにあるかどうかを判定
+   * ④存在すれば取得、無ければスナックバーでメッセージを表示
+   */
+  const loginUserSubmit: SubmitHandler<LoginUserType> = () => {
+
+  }
+
   return (
     <>
       <Box
@@ -79,6 +92,9 @@ export const TopLogicComponent = () => {
           branchAttendanceStatus={branchAttendanceStatus}
           lateReasonSubmit={lateReasonSubmit}
           attendanceStatus={attendanceStatus} />
+
+        <LoginDialog
+          loginUserSubmit={loginUserSubmit} />
       </Box>
 
       {/** ボタン押下後に処理が成功した際にスナックバーを表示 */}

@@ -109,7 +109,11 @@ export const UserStore = create<UserStoreType>()(
             result: "",
             message: ""
           }
-        }))
+        })),
+
+      loginDialog: false,
+
+      setLoginDialog: (bool: boolean) => set({ loginDialog: bool })
     }),
     {
       name: "user-storage",
