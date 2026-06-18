@@ -1,10 +1,13 @@
 "use client"
 
-import { UserValidations } from "@/schemas/userSchema";
+import { LoginValidation, UserValidations } from "@/schemas/userSchema";
+import { SubmitHandler } from "react-hook-form";
 import zod from "zod";
 
 // RHFと連携するための型
 export type UserType = zod.infer<typeof UserValidations>;
+
+export type LoginUserType = zod.infer<typeof LoginValidation>;
 
 // UserTextFieldのprops
 export type UserTextFieldType = {
@@ -40,4 +43,16 @@ export type UserTypeAddId = {
   name: string,
   departmentName: "generalAffairs" | "development" | "accounting" | "sales",
   mailAddress: string
+};
+
+// ログイン時に表示するダイアログのフォーム
+export type LoginTextFieldType = {
+  name: "mailAddress" | "password",
+  placeholder: string,
+  label: "メールアドレス" | "パスワード"
+};
+
+// LoginDialogのprops
+export type LoginDialogPropsType = {
+  loginUserSubmit: SubmitHandler<LoginUserType>
 };

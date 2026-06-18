@@ -26,6 +26,7 @@ export const DrawerComponent = () => {
   // ストアを取得
   const loginUser = UserStore((state) => state.loginUser);
   const logout = UserStore((state) => state.logout);
+  const setLoginDialog = UserStore((state) => state.setLoginDialog);
 
   // ストアでユーザー情報をもっているかの判別
   let userName = loginUser?.name ?? "ゲスト";
@@ -39,13 +40,14 @@ export const DrawerComponent = () => {
    * ②ログインアウト
    * ・ログイン
    * → 一旦ログアウトした利用者のために配置
+   * ②ログインを押下後、setLoginDialogにtrueを渡すことでログインダイアログ表示に派生させる
    */
   const DrawerMenu: DrawerMenuType[] = [
     {name: "ホーム", value: "home", icon: <HomeIcon />, onClick: () => {router.push("/")}},
     {name: `${userName} さん`, value: "user", icon: <AccountCircleIcon />},
     ...(loginUser
       ? [{name: "ログアウト", value: "logout", onClick: () => logout(), icon: <LogoutIcon />}]
-      : [{name: "ログイン", value: "login", icon: <LoginIcon />}]
+      : [{name: "ログイン", value: "login", onClick: () => setLoginDialog(true), icon: <LoginIcon />}]
     )
   ];
 
