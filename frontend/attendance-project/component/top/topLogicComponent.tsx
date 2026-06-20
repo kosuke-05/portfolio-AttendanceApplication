@@ -14,6 +14,7 @@ import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
 import { SnackBarComponent } from "./snackBarComponent";
 import { LoginDialog } from "../user/login/loginDialog";
 import { LoginUserType } from "@/types/user/userType";
+import { UserLoginHook } from "@/hooks/user/login/userLoginHook";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -33,6 +34,7 @@ export const TopLogicComponent = () => {
   const breakFinishHook = BreakFinishPostHook();
   const lateWorkStartHook = LateWorkStartPostHook();
   const lateWorkFinishHook = LateWorkFinishPostHook();
+  const userLoginHook = UserLoginHook();
 
   /**
    * 出勤・退勤ボタン押下後の処理
@@ -74,8 +76,8 @@ export const TopLogicComponent = () => {
    * ③バックエンド側に渡されたメールアドレス・パスワードがDBにあるかどうかを判定
    * ④存在すれば取得、無ければスナックバーでメッセージを表示
    */
-  const loginUserSubmit: SubmitHandler<LoginUserType> = () => {
-
+  const loginUserSubmit: SubmitHandler<LoginUserType> = (data) => {
+    userLoginHook.mutate(data);
   }
 
   return (
