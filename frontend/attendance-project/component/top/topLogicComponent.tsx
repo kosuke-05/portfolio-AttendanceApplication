@@ -5,13 +5,13 @@ import { StampButtons } from "./stampButtons";
 import { useState } from "react";
 import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
 import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
-import { AttendanceStatusType, LateTextFieldPropsType, LateType } from "@/types/top/topTypes";
+import { AttendanceStatusType, LateType } from "@/types/top/topTypes";
 import { BreakStartPostHook } from "@/hooks/attendance/breakStartPostHook";
 import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
 import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
 import { SubmitHandler } from "react-hook-form";
 import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
-import { SnackBarComponent } from "./snackBarComponent";
+import { AttendanceSnackBarComponent } from "./attendanceSnackBar";
 import { LoginDialog } from "../user/login/loginDialog";
 import { LoginUserType } from "@/types/user/userType";
 import { UserLoginHook } from "@/hooks/user/login/userLoginHook";
@@ -100,7 +100,10 @@ export const TopLogicComponent = () => {
       </Box>
 
       {/** ボタン押下後に処理が成功した際にスナックバーを表示 */}
-      <SnackBarComponent />
+      <AttendanceSnackBarComponent />
+
+      {/** ログインの成功・失敗の結果を表示 */}
+      
     </>
   )
 };

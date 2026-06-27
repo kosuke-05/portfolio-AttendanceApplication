@@ -12,9 +12,16 @@ export type AlertMessageType = {
 
 // ストアで使用する型
 export type UserStoreType = {
+  // ログイン成功時
   loginUser: UserTypeAddId | null,
-  setLoginUser: (user: UserTypeAddId) => void
+  setLoginUser: (user: UserTypeAddId) => void,
+
   logout: () => void,
+
+  // ログイン失敗時
+  loginUserError: boolean
+  setLoginUserError: (bool: boolean) => void,
+
 
   // 出勤・退勤・休憩に関する現在状況
   attendanceStatus: {

@@ -39,7 +39,7 @@ export type UserInitialFormType = {
 
 // idを追加した型
 export type UserTypeAddId = {
-  id: string,
+  id: number,
   name: string,
   departmentName: "generalAffairs" | "development" | "accounting" | "sales",
   mailAddress: string

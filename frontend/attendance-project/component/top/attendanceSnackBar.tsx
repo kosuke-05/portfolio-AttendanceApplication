@@ -4,7 +4,7 @@ import { UserStore } from "@/stores/user/userStore";
 import { Alert, Snackbar } from "@mui/material";
 
 // 出勤・退勤・休憩開始・休憩終了ボタン押下後に処理が成功するとスナックバーを表示
-export const SnackBarComponent = () => {
+export const AttendanceSnackBarComponent = () => {
   // ストアから取得
   // 空文字（falsyな値）じゃなかった場合、snackbarを表示
   const alertMessage = UserStore((state) => state.alertMessage);
