@@ -1,5 +1,5 @@
 import type { QueryResult } from "pg";
-import type { UserLoginType } from "../../../../types/user/userType.js";
+import type { TableType, UserLoginType } from "../../../../types/user/userType.js";
 import { UserLoginRepository } from "../../../repository/user/login/userLoginRepository.js";
 import bcrypt from "bcrypt";
 
@@ -10,12 +10,25 @@ import bcrypt from "bcrypt";
  * ③service内で仮引数で受け取ったパスワードが合致するカラムを探す
  */
 export const UserLoginService = async (data: UserLoginType) => {
-  const user: QueryResult = await UserLoginRepository(data.mailAddress);
+  const user: QueryResult<TableType> = await UserLoginRepository(data.mailAddress);
 
-  if(!user) {
-    throw new Error("メールアドレスかパスワードが違います。");
+  if(user.rowCount === 0) {
+    throw new Error("メールアドレスかパスワードが間違っています。");
   }
 
+  const loginUser = user.rows[0]!;
+
   // パスワードの照合
-  const isMatch = await bcrypt.compare(data.password, user.pass_word);
+  const isMatch = await bcrypt.compare(data.password, loginUser.pass_word);
+
+  if(isMatch) {
+    return {
+      user: {
+        id: loginUser.id,
+        name: loginUser.name,
+        departmentName: loginUser.department_name,
+        mailAddress: loginUser.mail_address
+      }
+    }
+  }
 };

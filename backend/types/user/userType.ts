@@ -11,3 +11,15 @@ export type UserLoginType = {
   mailAddress: string,
   password: string
 };
+
+// テーブルから取得したレコード内容
+export type TableType = {
+  id: number,
+  name: string,
+  department_name: "generalAffairs" | "development" | "accounting" | "sales",
+  mail_address: string,
+  pass_word: string
+};
+
+// 上記の型からパスワードのみを省いた型
+export type TableExcludePassWord = Exclude<TableType, "pass_word">;

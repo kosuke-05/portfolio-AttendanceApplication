@@ -12,6 +12,9 @@ export const UserStore = create<UserStoreType>()(
       setLoginUser: (user: UserTypeAddId) => set({ loginUser: user }),
       logout: () => set({ loginUser: null }),
 
+      loginUserError: false,
+      setLoginUserError: (bool: boolean) => set({ loginUserError: bool }),
+
       attendanceStatus: {
         work_start: false,
         work_finish: false,
