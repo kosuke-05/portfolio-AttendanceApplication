@@ -9,13 +9,13 @@ export type AttendanceType = "出勤" | "退勤";
 
 // Buttonsのprops
 export type ButtonsPropsType = {
-  branchAttendanceStatus: (status: AttendanceStatusType) => void,
+  branchAttendanceStatus: (status: Exclude<AttendanceStatusType, "none">) => void,
   lateReasonSubmit: SubmitHandler<LateType>,
   attendanceStatus: AttendanceStatusType
 };
 
 // 出勤・退勤・休憩開始・休憩終了
-export type AttendanceStatusType = "work_start" | "work_finish" | "break_start" | "break_finish";
+export type AttendanceStatusType = "work_start" | "work_finish" | "break_start" | "break_finish" | "none"
 
 // LateTextFieldのpropsの型
 export type LateTextFieldPropsType = {

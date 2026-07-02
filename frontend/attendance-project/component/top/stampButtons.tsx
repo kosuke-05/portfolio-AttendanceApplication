@@ -40,7 +40,10 @@ export const  StampButtons = ({
         <Button
           variant="contained"
           onClick={() => branchAttendanceStatus("work_start")}
-          disabled={attendanceStatusStore.work_start}
+          disabled={
+            attendanceStatusStore === "work_start" ||
+            !loginUser
+          }
           sx={{
             width: "300px",
             height: "200px",
@@ -67,8 +70,8 @@ export const  StampButtons = ({
         <Button
           variant="contained"
           disabled={
-            !attendanceStatusStore.work_start ||
-            attendanceStatusStore.work_finish
+            attendanceStatusStore === "work_finish" ||
+            attendanceStatusStore !== "work_start"
           }
           onClick={() => branchAttendanceStatus("work_finish")}
           sx={{
@@ -102,9 +105,9 @@ export const  StampButtons = ({
         <Button
           variant="contained"
           disabled={
-            !attendanceStatusStore.work_start ||
-            attendanceStatusStore.work_finish ||
-            attendanceStatusStore.break_start
+            attendanceStatusStore === "work_finish" ||
+            attendanceStatusStore === "break_start" ||
+            attendanceStatusStore !== "work_start"
           }
           onClick={() => branchAttendanceStatus("break_start")}
           sx={{
@@ -132,9 +135,8 @@ export const  StampButtons = ({
         <Button
           variant="contained"
           disabled={
-            !attendanceStatusStore.work_start ||
-            attendanceStatusStore.work_finish ||
-            !attendanceStatusStore.break_start
+            attendanceStatusStore === "work_finish" ||
+            attendanceStatusStore !== "break_start"
           }
           onClick={() => branchAttendanceStatus("break_finish")}
           sx={{

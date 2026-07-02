@@ -1,8 +1,12 @@
 "use client"
 
+import { AttendanceStatusType } from "../top/topTypes";
 import { UserTypeAddId } from "../user/userType"
 
-type AttendanceKey = "work_start" | "work_finish" | "break_start" | "break_finish";
+export type loginMessageType = {
+  message: string | null,
+  result: boolean | null
+};
 
 // alertMessageの型
 export type AlertMessageType = {
@@ -19,19 +23,13 @@ export type UserStoreType = {
   logout: () => void,
 
   // ログイン失敗時
-  loginUserError: boolean
-  setLoginUserError: (bool: boolean) => void,
-
+  loginMessage: loginMessageType,
+  setLoginMessage: (result: loginMessageType) => void,
 
   // 出勤・退勤・休憩に関する現在状況
-  attendanceStatus: {
-    work_start: boolean,
-    work_finish: boolean,
-    break_start: boolean,
-    break_finish: boolean
-  },
+  attendanceStatus: "none" | "work_start" | "work_finish" | "break_start" | "break_finish",
 
-  setAttendanceStatus: (key: AttendanceKey, value: boolean) => void,
+  setAttendanceStatus: (status: AttendanceStatusType) => void,
 
   resetAttendanceStatus: () => void,
 
@@ -43,7 +41,7 @@ export type UserStoreType = {
     break_finish: string
   },
 
-  setAttendanceTime: (key: AttendanceKey, value: string) => void,
+  setAttendanceTime: (key: AttendanceStatusType, value: string) => void,
 
   resetAttendanceTime: () => void,
 
@@ -55,7 +53,7 @@ export type UserStoreType = {
     break_finish: boolean
   },
 
-  setOverLimitTime: (key: AttendanceKey, value: boolean) => void,
+  setOverLimitTime: (key: AttendanceStatusType, value: boolean) => void,
 
   resetOverLimitTime: () => void,
 
