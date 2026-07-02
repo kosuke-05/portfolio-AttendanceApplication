@@ -28,7 +28,8 @@ export const UserLoginService = async (data: UserLoginType) => {
         name: loginUser.name,
         departmentName: loginUser.department_name,
         mailAddress: loginUser.mail_address
-      }
+      },
+      message: "ログイン成功"
     }
   }
 };

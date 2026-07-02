@@ -2,7 +2,6 @@
 
 import Box from "@mui/material/Box";
 import { StampButtons } from "./stampButtons";
-import { useState } from "react";
 import { WorkStartPostHook } from "@/hooks/attendance/workStartPostHook";
 import { WorkFinishPostHook } from "@/hooks/attendance/workFinishPostHook";
 import { AttendanceStatusType, LateType } from "@/types/top/topTypes";
@@ -15,15 +14,11 @@ import { AttendanceSnackBarComponent } from "./attendanceSnackBar";
 import { LoginDialog } from "../user/login/loginDialog";
 import { LoginUserType } from "@/types/user/userType";
 import { UserLoginHook } from "@/hooks/user/login/userLoginHook";
+import { LoginSnackBar } from "./loginSnackBar";
+import { UserStore } from "@/stores/user/userStore";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
-  /**
-   * 出勤か退勤の分岐管理
-   * 注意：初期値をwork_startにすると他で不具合になるため空文字のままにする
-   */
-  const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatusType | "">("");
-
   /**
    * ①出勤時のhooks呼び出し
    * ②退勤時のhooks呼び出し
@@ -36,6 +31,10 @@ export const TopLogicComponent = () => {
   const lateWorkFinishHook = LateWorkFinishPostHook();
   const userLoginHook = UserLoginHook();
 
+  // ストアから取得
+  const attendanceStatus = UserStore((state) => state.attendanceStatus);
+  const setAttendanceStatus = UserStore((state) => state.setAttendanceStatus);
+
   /**
    * 出勤・退勤ボタン押下後の処理
    * ①出勤・退勤いずれかによって処理を分岐
@@ -46,7 +45,7 @@ export const TopLogicComponent = () => {
    * ●共通項
    * ①ストアからattendanceStatusを取得して、オブジェクトのプロパティ値にtrueを渡す
    */
-  const branchAttendanceStatus = (status: AttendanceStatusType) => {
+  const branchAttendanceStatus = (status: Exclude<AttendanceStatusType, "none">) => {
     setAttendanceStatus(status);
 
     if(status === "work_start") {
@@ -68,6 +67,11 @@ export const TopLogicComponent = () => {
       lateWorkFinishHook.mutate(lateReason);
     }
   };
+
+  // // ユーザー新規登録ボタン押下後の処理
+  // const userSubmit = () => {
+
+  // }
 
   /**
    * ログイン情報入力後の処理
@@ -103,7 +107,7 @@ export const TopLogicComponent = () => {
       <AttendanceSnackBarComponent />
 
       {/** ログインの成功・失敗の結果を表示 */}
-      
+      <LoginSnackBar />
     </>
   )
 };

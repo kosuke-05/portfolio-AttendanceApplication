@@ -11,6 +11,7 @@ export const UserLoginHook = () => {
 
   // ストアから取得
   const setLoginUser = UserStore((state) => state.setLoginUser);
+  const setLoginMessage = UserStore((state) => state.setLoginMessage);
 
   return useMutation({
     mutationFn: UserLoginApi,
@@ -19,6 +20,17 @@ export const UserLoginHook = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
 
       setLoginUser(res.user);
+      setLoginMessage({
+        message: res.message,
+        result: true
+      });
+    },
+
+    onError: (res) => {
+      setLoginMessage({
+        message: res.message,
+        result: false
+      });
     }
   })
 };

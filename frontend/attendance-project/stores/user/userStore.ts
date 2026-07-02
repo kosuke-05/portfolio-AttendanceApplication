@@ -1,6 +1,7 @@
 "use client"
 
-import { AlertMessageType, UserStoreType } from "@/types/store/userStoreType";
+import { AlertMessageType, loginMessageType, UserStoreType } from "@/types/store/userStoreType";
+import { AttendanceStatusType } from "@/types/top/topTypes";
 import { UserTypeAddId } from "@/types/user/userType";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -12,36 +13,22 @@ export const UserStore = create<UserStoreType>()(
       setLoginUser: (user: UserTypeAddId) => set({ loginUser: user }),
       logout: () => set({ loginUser: null }),
 
-      loginUserError: false,
-      setLoginUserError: (bool: boolean) => set({ loginUserError: bool }),
-
-      attendanceStatus: {
-        work_start: false,
-        work_finish: false,
-        break_start: false,
-        break_finish: false
+      loginMessage: {
+        message: null,
+        result: null
       },
+      setLoginMessage: (param: loginMessageType) => set({
+        loginMessage: {
+          message: param.message,
+          result: param.result
+        }
+      }),
 
-      setAttendanceStatus: (
-        key,
-        value
-      ) =>
-        set((state) => ({
-          attendanceStatus: {
-            ...state.attendanceStatus,
-            [key]: value
-          }
-        })),
+      attendanceStatus: "none",
+
+      setAttendanceStatus: (value: AttendanceStatusType) => set({ attendanceStatus: value }),
       
-      resetAttendanceStatus: () =>
-        set(() => ({
-          attendanceStatus: {
-            work_start: false,
-            work_finish: false,
-            break_start: false,
-            break_finish: false
-          }
-        })),
+      resetAttendanceStatus: () => set({ attendanceStatus: "none" }),
 
       attendanceTime: {
         work_start: "",
