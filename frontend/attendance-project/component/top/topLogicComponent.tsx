@@ -10,12 +10,13 @@ import { BreakFinishPostHook } from "@/hooks/attendance/breakFinishPostHook";
 import { LateWorkStartPostHook } from "@/hooks/late/workStartPostHook";
 import { SubmitHandler } from "react-hook-form";
 import { LateWorkFinishPostHook } from "@/hooks/late/workFinishPostHook";
-import { AttendanceSnackBarComponent } from "./attendanceSnackBar";
+import { AttendanceSnackBarComponent } from "./snackBar/attendanceSnackBar";
 import { LoginDialog } from "../user/login/loginDialog";
 import { LoginUserType } from "@/types/user/userType";
 import { UserLoginHook } from "@/hooks/user/login/userLoginHook";
-import { LoginSnackBar } from "./loginSnackBar";
+import { LoginSnackBar } from "./snackBar/loginSnackBar";
 import { UserStore } from "@/stores/user/userStore";
+import { UserRegistrationSnackBar } from "./snackBar/userRegistrationSnackBar";
 
 // トップページのロジックコンポーネント
 export const TopLogicComponent = () => {
@@ -105,6 +106,9 @@ export const TopLogicComponent = () => {
 
       {/** ボタン押下後に処理が成功した際にスナックバーを表示 */}
       <AttendanceSnackBarComponent />
+
+      {/** ユーザー新規登録の失敗メッセージの表示 */}
+      <UserRegistrationSnackBar />
 
       {/** ログインの成功・失敗の結果を表示 */}
       <LoginSnackBar />

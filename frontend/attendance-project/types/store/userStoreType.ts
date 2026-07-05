@@ -3,7 +3,7 @@
 import { AttendanceStatusType } from "../top/topTypes";
 import { UserTypeAddId } from "../user/userType"
 
-export type loginMessageType = {
+export type registrationOrLoginMessageType = {
   message: string | null,
   result: boolean | null
 };
@@ -23,8 +23,12 @@ export type UserStoreType = {
   logout: () => void,
 
   // ログイン失敗時
-  loginMessage: loginMessageType,
-  setLoginMessage: (result: loginMessageType) => void,
+  loginMessage: registrationOrLoginMessageType,
+  setLoginMessage: (result: registrationOrLoginMessageType) => void,
+
+  // ユーザー新規登録の際の成功・失敗メッセージ
+  userRegistrationMessage: registrationOrLoginMessageType,
+  setUserRegistrationMessage: (result: registrationOrLoginMessageType) => void,
 
   // 出勤・退勤・休憩に関する現在状況
   attendanceStatus: "none" | "work_start" | "work_finish" | "break_start" | "break_finish",

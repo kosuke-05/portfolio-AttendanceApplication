@@ -10,6 +10,10 @@ export const userPostController = async (req: Request, res: Response) => {
 
     return res.status(201).json(result);
   } catch(err) {
-    return res.status(500).json({ message : "error" });
+    if(err instanceof Error) {
+      return res.status(401).json({
+        message: err.message
+      })
+    }
   }
 };
