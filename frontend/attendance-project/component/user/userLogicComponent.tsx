@@ -46,7 +46,7 @@ export const UserLogicComponent = () => {
    */
   const registrationStart = (data: UserType) => {
     post.mutate(data);
-    afterRegistration(data);
+    afterRegistration();
   };
 
   /**
@@ -54,7 +54,7 @@ export const UserLogicComponent = () => {
    * ①トップ画面に遷移
    * ②フォームを初期値（空文字）にリセット
    */
-  const afterRegistration = (data: UserType) => {
+  const afterRegistration = () => {
     router.push("/");
     methods.reset(UserInitialForm);
   };

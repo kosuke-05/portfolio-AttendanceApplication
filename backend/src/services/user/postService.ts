@@ -7,7 +7,7 @@ import { userPostRepository } from "../../repository/user/repositories.js";
 export const postService = async (data: UserInputType) => {
   // バリデーション
   if(!data.name || !data.departmentName || !data.mailAddress || !data.password) {
-    console.log("データが見つかりません。");
+    throw new Error("新規登録に失敗しました");
   }
 
   // パスワードのハッシュ化
@@ -37,9 +37,10 @@ export const postService = async (data: UserInputType) => {
     user: {
       id: user.id,
       name: user.name,
-      department_name: user.departmentName,
-      mail_address: user.mailAddress
+      department_name: user.department_name,
+      mail_address: user.mail_address
     },
+    message: "ユーザー新規登録に成功しました。",
     token
   }
 };

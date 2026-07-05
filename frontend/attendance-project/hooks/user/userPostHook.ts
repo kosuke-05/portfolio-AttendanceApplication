@@ -12,6 +12,7 @@ export const UserPostHook = () => {
 
   // ストアを取得
   const setLoginUser = UserStore((state) => state.setLoginUser);
+  const setUserRegistrationMessage = UserStore((state) => state.setUserRegistrationMessage);
 
   return useMutation({
     mutationFn: UserPostApi,
@@ -25,6 +26,19 @@ export const UserPostHook = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setLoginUser(res.user);
       setToken(res.token);
+      setUserRegistrationMessage({
+        message: res.message,
+        result: true
+      })
+    },
+
+    onError: (err) => {
+      if(err instanceof Error) {
+        setUserRegistrationMessage({
+          message: err.message,
+          result: false
+        });
+      }
     }
   });
 };
