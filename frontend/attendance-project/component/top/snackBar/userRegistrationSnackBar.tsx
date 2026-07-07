@@ -13,7 +13,6 @@ export const UserRegistrationSnackBar = () => {
     <Snackbar
       open={userRegistrationMessage.result !== null}
       autoHideDuration={3000}
-      message={userRegistrationMessage.message}
       onClose={
         () => setUserRegistrationMessage({
           message: null,
@@ -24,7 +23,9 @@ export const UserRegistrationSnackBar = () => {
         vertical: "top",
         horizontal: "center"
       }}>
-      <Alert severity={userRegistrationMessage.result ? "success" : "error"} />
+      <Alert severity={userRegistrationMessage.result ? "success" : "error"}>
+        {userRegistrationMessage.message}
+      </Alert>
     </Snackbar>
   )
 };

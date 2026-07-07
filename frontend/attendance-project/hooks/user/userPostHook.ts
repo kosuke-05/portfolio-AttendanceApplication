@@ -26,6 +26,9 @@ export const UserPostHook = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setLoginUser(res.user);
       setToken(res.token);
+
+      console.log(res.message);
+      
       setUserRegistrationMessage({
         message: res.message,
         result: true

@@ -10,8 +10,8 @@ export type registrationOrLoginMessageType = {
 
 // alertMessageの型
 export type AlertMessageType = {
-  result: "success" | "error" | "",
-  message: string
+  result: boolean | null,
+  message: string | null
 };
 
 // ストアで使用する型

@@ -13,18 +13,16 @@ export const AttendanceSnackBarComponent = () => {
   return (
     <>
       <Snackbar
-        open={
-          alertMessage.result === "success" || alertMessage.result === "error"
-        }
+        open={alertMessage.message !== null}
         autoHideDuration={3000}
-        message={alertMessage.message}
         onClose={resetAlertMessage}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}>
-        <Alert
-          severity={alertMessage.result === "success" ? "success" : "error"} />
+        <Alert severity={alertMessage.result ? "success" : "error"}>
+          {alertMessage.message}
+        </Alert>
       </Snackbar>
     </>
   )

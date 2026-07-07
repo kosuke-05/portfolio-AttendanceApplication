@@ -22,11 +22,11 @@ export const WorkStartPostHook = () => {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["attendance"] });
 
-      setAttendanceStatus("work_start", true);
+      setAttendanceStatus("work_start");
       setAttendanceTime("work_start", res.attendance);
       setOverLimitTime("work_start", res.isLate);
       setAlertMessage({
-        result: "success",
+        result: true,
         message: res.message
       });
 
@@ -36,7 +36,7 @@ export const WorkStartPostHook = () => {
 
     onError: (res) => {
       setAlertMessage({
-        result: "error",
+        result: false,
         message: res.message
       })
     }
