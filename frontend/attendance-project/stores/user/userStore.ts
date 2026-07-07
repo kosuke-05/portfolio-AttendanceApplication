@@ -93,8 +93,8 @@ export const UserStore = create<UserStoreType>()(
         })),
 
       alertMessage: {
-        result: "",
-        message: ""
+        result: null,
+        message: null
       },
 
       setAlertMessage: (message: AlertMessageType) => set({ alertMessage: message }),
@@ -102,8 +102,8 @@ export const UserStore = create<UserStoreType>()(
       resetAlertMessage: () =>
         set(() => ({
           alertMessage: {
-            result: "",
-            message: ""
+            result: null,
+            message: null
           }
         })),
 

@@ -17,7 +17,7 @@ export const workStartController = async (req: Request, res: Response) => {
 
   } catch(err) {
     return res.status(500).json({
-      message: "Server Error"
+      message: "出勤時刻が登録できませんでした。"
     });
   };
 };

@@ -8,7 +8,10 @@ export const userPostController = async (req: Request, res: Response) => {
 
     const result = await postService(data);
 
-    return res.status(201).json(result);
+    return res.status(201).json({
+      result,
+      message: "ユーザー登録に成功しました。"
+    });
   } catch(err) {
     if(err instanceof Error) {
       return res.status(401).json({
