@@ -51,8 +51,9 @@ export const DrawerComponent = () => {
     )
   ];
 
+  // 勤怠情報が未確定のため、一時保留
   const Drawer2LayersMenu: DrawerMenuType[] = [
-    {name: "勤怠情報", value: "attendanceInformation", onClick: () => {router.push("/attendanceInformation")}},
+    {name: "勤怠情報", value: "attendanceInformation", onClick: () => {}},
   ];
 
   return (

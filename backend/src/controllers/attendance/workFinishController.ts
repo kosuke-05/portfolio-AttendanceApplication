@@ -5,6 +5,8 @@ export const workFinishController = async (req: Request, res: Response) => {
   try {
     const time = await workFinishService();
 
+    console.log("デバッグ：controller");
+
     // 有効である場合
     return res.status(200).json({
       message: "退勤時刻の登録完了",

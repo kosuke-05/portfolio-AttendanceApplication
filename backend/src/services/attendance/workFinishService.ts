@@ -13,6 +13,8 @@ export const workFinishService = async () => {
   // DB処理へ移行
   const result = await workFinishRepository(time!);
 
+  console.log("デバッグ：service")
+
   return {
     attendance: result.rows[0],
     isLate
