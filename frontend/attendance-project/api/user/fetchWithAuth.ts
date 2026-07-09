@@ -8,6 +8,8 @@ export const fetchWithAuth = async (url: string, option: RequestInit = {}) => {
   // トークンの取得
   const token = getToken();
 
+  console.log(`トークン：${token}`);
+
   // ストアの取得
   const logout = UserStore((state) => state.logout);
 
