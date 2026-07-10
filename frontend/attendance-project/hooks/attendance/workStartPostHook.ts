@@ -16,6 +16,10 @@ export const WorkStartPostHook = () => {
   const setOverLimitTime = UserStore((state) => state.setOverLimitTime);
   const setAlertMessage = UserStore((state) => state.setAlertMessage);
 
+  /**
+   * 注意点
+   * ①バックエンド側から返された時刻を正常にフロントに渡す
+   */
   return useMutation({
     mutationFn: WorkStartPostApi,
 
@@ -30,6 +34,11 @@ export const WorkStartPostHook = () => {
         message: res.message
       });
 
+      console.log(`
+        登録時刻：${res.attendance}
+        遅刻判定：${res.isLate}
+      `);
+
       // トークンを渡す
       setToken(res.token);
     },
@@ -38,7 +47,9 @@ export const WorkStartPostHook = () => {
       setAlertMessage({
         result: false,
         message: res.message
-      })
+      });
+
+      console.log("出勤処理に失敗");
     }
   });
 };

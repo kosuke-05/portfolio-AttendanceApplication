@@ -42,6 +42,7 @@ export const  StampButtons = ({
           onClick={() => branchAttendanceStatus("work_start")}
           disabled={
             attendanceStatusStore === "work_start" ||
+            attendanceStatusStore === "break_start" ||
             !loginUser
           }
           sx={{
