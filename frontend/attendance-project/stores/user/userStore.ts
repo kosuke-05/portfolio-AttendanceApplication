@@ -1,6 +1,6 @@
 "use client"
 
-import { AlertMessageType, registrationOrLoginMessageType, UserStoreType } from "@/types/store/userStoreType";
+import { AlertMessageType, AttendanceStatusObjectType, registrationOrLoginMessageType, UserStoreType } from "@/types/store/userStoreType";
 import { AttendanceStatusType } from "@/types/top/topTypes";
 import { UserTypeAddId } from "@/types/user/userType";
 import { create } from "zustand";
@@ -30,11 +30,28 @@ export const UserStore = create<UserStoreType>()(
       },
       setUserRegistrationMessage: (param: registrationOrLoginMessageType) => set({ userRegistrationMessage: param }),
 
-      attendanceStatus: "none",
+      attendanceStatus: {
+        isWorking: false,
+        isBreaking: false,
+        hasFinished: false
+      },
 
-      setAttendanceStatus: (value: AttendanceStatusType) => set({ attendanceStatus: value }),
+      setAttendanceStatus: (value: AttendanceStatusObjectType) =>
+        set((state) => ({
+          attendanceStatus: {
+            ...state.attendanceStatus,
+            ...value
+          }
+        })),
 
-      resetAttendanceStatus: () => set({ attendanceStatus: "none" }),
+      resetAttendanceStatus: () =>
+        set({
+          attendanceStatus: {
+            isWorking: false,
+            isBreaking: false,
+            hasFinished: false
+          }
+        }),
 
       attendanceTime: {
         work_start: "",

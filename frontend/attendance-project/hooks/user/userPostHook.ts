@@ -24,10 +24,11 @@ export const UserPostHook = () => {
      */
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
-      setLoginUser(res.user);
+      setLoginUser(res.result.user);
       setToken(res.token);
 
       console.log(res.message);
+      console.log(`ユーザー：${res.result.user.name}`);
       
       setUserRegistrationMessage({
         message: res.message,

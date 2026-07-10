@@ -69,11 +69,6 @@ export const TopLogicComponent = () => {
     }
   };
 
-  // // ユーザー新規登録ボタン押下後の処理
-  // const userSubmit = () => {
-
-  // }
-
   /**
    * ログイン情報入力後の処理
    * ①hooksにメールアドレス・パスワードを渡す

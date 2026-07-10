@@ -14,6 +14,13 @@ export type AlertMessageType = {
   message: string | null
 };
 
+// attendanceStatusの型
+export type AttendanceStatusObjectType = {
+  isWorking: boolean,
+  isBreaking: boolean,
+  hasFinished: boolean
+};
+
 // ストアで使用する型
 export type UserStoreType = {
   // ログイン成功時
@@ -31,9 +38,9 @@ export type UserStoreType = {
   setUserRegistrationMessage: (result: registrationOrLoginMessageType) => void,
 
   // 出勤・退勤・休憩に関する現在状況
-  attendanceStatus: "none" | "work_start" | "work_finish" | "break_start" | "break_finish",
+  attendanceStatus: AttendanceStatusObjectType,
 
-  setAttendanceStatus: (status: AttendanceStatusType) => void,
+  setAttendanceStatus: (status: AttendanceStatusObjectType) => void,
 
   resetAttendanceStatus: () => void,
 
