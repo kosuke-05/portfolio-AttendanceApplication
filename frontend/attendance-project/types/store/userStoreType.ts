@@ -16,9 +16,10 @@ export type AlertMessageType = {
 
 // attendanceStatusの型
 export type AttendanceStatusObjectType = {
-  isWorking: boolean,
-  isBreaking: boolean,
-  hasFinished: boolean
+  workStart: boolean,
+  breakStart: boolean,
+  breakFinish: boolean,
+  workFinish: boolean
 };
 
 // ストアで使用する型

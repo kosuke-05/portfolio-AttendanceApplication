@@ -8,6 +8,8 @@ export const workStartController = async (req: Request, res: Response) => {
 
     const result = await workStartService(userId!);
 
+    console.log("出勤 : controller");
+
     // 有効である場合
     return res.status(200).json({
       message: "出勤時刻の登録完了",
