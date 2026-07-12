@@ -21,7 +21,12 @@ export const WorkFinishPostHook = () => {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["attendance"] });
 
-      setAttendanceStatus("work_finish");
+      setAttendanceStatus({
+        workStart: true,
+        breakStart: true,
+        breakFinish: true,
+        workFinish: true
+      });
       setAttendanceTime("work_finish", res.attendance);
       setOverLimitTime("work_finish", res.isLate);
       setAlertMessage({

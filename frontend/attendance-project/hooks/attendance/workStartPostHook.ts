@@ -26,7 +26,12 @@ export const WorkStartPostHook = () => {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["attendance"] });
 
-      setAttendanceStatus("work_start");
+      setAttendanceStatus({
+        workStart: true,
+        breakStart: false,
+        breakFinish: false,
+        workFinish: false
+      });
       setAttendanceTime("work_start", res.attendance);
       setOverLimitTime("work_start", res.isLate);
       setAlertMessage({
@@ -48,6 +53,9 @@ export const WorkStartPostHook = () => {
         result: false,
         message: res.message
       });
+
+      // controllerからのレスが入るかデバッグ
+      console.log(`出勤処理メッセージ : ${res.message}`);
 
       console.log("出勤処理に失敗");
     }

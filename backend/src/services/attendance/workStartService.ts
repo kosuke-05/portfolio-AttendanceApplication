@@ -24,6 +24,8 @@ export const workStartService = async (userId: number) => {
    */
   const result = await workStartRepository(userId, time!, date);
 
+  console.log("出勤 : service");
+
   // 登録したデータを返す
   return {
     attendance: result.rows[0],

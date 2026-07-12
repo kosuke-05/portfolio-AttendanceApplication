@@ -31,9 +31,10 @@ export const UserStore = create<UserStoreType>()(
       setUserRegistrationMessage: (param: registrationOrLoginMessageType) => set({ userRegistrationMessage: param }),
 
       attendanceStatus: {
-        isWorking: false,
-        isBreaking: false,
-        hasFinished: false
+        workStart: false,
+        breakStart: false,
+        breakFinish: false,
+        workFinish: false
       },
 
       setAttendanceStatus: (value: AttendanceStatusObjectType) =>
@@ -47,9 +48,10 @@ export const UserStore = create<UserStoreType>()(
       resetAttendanceStatus: () =>
         set({
           attendanceStatus: {
-            isWorking: false,
-            isBreaking: false,
-            hasFinished: false
+            workStart: false,
+            breakStart: false,
+            breakFinish: false,
+            workFinish: false
           }
         }),
 

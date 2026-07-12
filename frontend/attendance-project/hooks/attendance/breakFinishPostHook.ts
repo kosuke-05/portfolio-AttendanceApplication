@@ -19,18 +19,23 @@ export const BreakFinishPostHook = () => {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["attendance"] });
 
-      setAttendanceStatus("break_finish", true);
+      setAttendanceStatus({
+        workStart: true,
+        breakStart: true,
+        breakFinish: true,
+        workFinish: false
+      });
       setAttendanceTime("break_finish", res.time);
 
       setAlertMessage({
-        result: "success",
+        result: true,
         message: res.message
       })
     },
 
     onError: (res) => {
       setAlertMessage({
-        result: "error",
+        result: false,
         message: res.message
       })
     }
