@@ -10,9 +10,6 @@ export const fetchWithAuth = async (url: string, option: RequestInit = {}) => {
 
   console.log(`トークン：${token}`);
 
-  // ストアの取得
-  const logout = UserStore((state) => state.logout);
-
   // API通信
   const res = await fetch(url, {
     ...option,
@@ -31,7 +28,7 @@ export const fetchWithAuth = async (url: string, option: RequestInit = {}) => {
    */
   if(res.status === 401) {
     removeToken();
-    logout();
+    UserStore.getState().logout();
 
     // パスが未完成
     window.location.href = "";
