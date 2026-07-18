@@ -8,14 +8,19 @@ export const AttendanceSnackBarComponent = () => {
   // ストアから取得
   // 空文字（falsyな値）じゃなかった場合、snackbarを表示
   const alertMessage = UserStore((state) => state.alertMessage);
-  const resetAlertMessage = UserStore((state) => state.resetAlertMessage);
+  const setAlertMessage = UserStore((state) => state.setAlertMessage);
 
   return (
     <>
       <Snackbar
         open={alertMessage.message !== null}
         autoHideDuration={3000}
-        onClose={resetAlertMessage}
+        onClose={
+          () => setAlertMessage({
+            message: null,
+            result: null
+          })
+        }
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"

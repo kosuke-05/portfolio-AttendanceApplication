@@ -23,7 +23,7 @@ export const UserPostHook = () => {
      * ③localstorageにトークンを渡す
      */
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      // queryClient.invalidateQueries({ queryKey: ["users"] });
       setLoginUser(res.result.user);
       setToken(res.token);
 
