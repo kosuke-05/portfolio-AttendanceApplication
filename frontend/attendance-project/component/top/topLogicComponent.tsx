@@ -47,7 +47,17 @@ export const TopLogicComponent = () => {
    * ①ストアからattendanceStatusを取得して、オブジェクトのプロパティ値にtrueを渡す
    */
   const branchAttendanceStatus = (status: Exclude<AttendanceStatusType, "none">) => {
-    setAttendanceStatus(status);
+
+    // 要修正
+    switch(status) {
+      case "work_start":
+        setAttendanceStatus({
+          ...status,
+          workStart: true
+        })
+        workStartHook.mutate();
+        break;
+    }
 
     if(status === "work_start") {
       workStartHook.mutate();
@@ -62,9 +72,9 @@ export const TopLogicComponent = () => {
 
   // 遅刻理由記入後の送信処理
   const lateReasonSubmit: SubmitHandler<LateType> = (lateReason) => {
-    if(attendanceStatus === "work_start") {
+    if(attendanceStatus.workStart) {
       lateWorkStartHook.mutate(lateReason);
-    } else if(attendanceStatus === "work_finish") {
+    } else if(attendanceStatus.workFinish) {
       lateWorkFinishHook.mutate(lateReason);
     }
   };

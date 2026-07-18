@@ -1,7 +1,6 @@
 "use client"
 
 import { AlertMessageType, AttendanceStatusObjectType, registrationOrLoginMessageType, UserStoreType } from "@/types/store/userStoreType";
-import { AttendanceStatusType } from "@/types/top/topTypes";
 import { UserTypeAddId } from "@/types/user/userType";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -11,7 +10,15 @@ export const UserStore = create<UserStoreType>()(
     (set) => ({
       loginUser: null,
       setLoginUser: (user: UserTypeAddId) => set({ loginUser: user }),
-      logout: () => set({ loginUser: null }),
+      logout: () => set({
+        loginUser: null,
+        attendanceStatus: {
+          workStart: false,
+          breakStart: false,
+          breakFinish: false,
+          workFinish: false
+        }
+      }),
 
       loginMessage: {
         message: null,
@@ -118,13 +125,13 @@ export const UserStore = create<UserStoreType>()(
 
       setAlertMessage: (message: AlertMessageType) => set({ alertMessage: message }),
 
-      resetAlertMessage: () =>
-        set(() => ({
-          alertMessage: {
-            result: null,
-            message: null
-          }
-        })),
+      // resetAlertMessage: () =>
+      //   set(() => ({
+      //     alertMessage: {
+      //       result: null,
+      //       message: null
+      //     }
+      //   })),
 
       loginDialog: false,
 
