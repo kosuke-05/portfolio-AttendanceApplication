@@ -52,21 +52,43 @@ export const TopLogicComponent = () => {
     switch(status) {
       case "work_start":
         setAttendanceStatus({
-          ...status,
-          workStart: true
+          workStart: true,
+          workFinish: false,
+          breakStart: false,
+          breakFinish: false
         })
         workStartHook.mutate();
         break;
-    }
 
-    if(status === "work_start") {
-      workStartHook.mutate();
-    } else if(status === "work_finish") {
-      workFinishHook.mutate();
-    } else if(status === "break_start") {
-      breakStartHook.mutate();
-    } else if(status === "break_finish") {
-      breakFinishHook.mutate();
+      case "work_finish":
+        setAttendanceStatus({
+          workStart: true,
+          workFinish: true,
+          breakStart: true,
+          breakFinish: true
+        })
+        workFinishHook.mutate();
+        break;
+
+      case "break_start":
+        setAttendanceStatus({
+          workStart: true,
+          workFinish: false,
+          breakStart: true,
+          breakFinish: false
+        })
+        breakStartHook.mutate();
+        break;
+
+      case "break_finish":
+        setAttendanceStatus({
+          workStart: true,
+          workFinish: false,
+          breakStart: true,
+          breakFinish: true
+        })
+        breakFinishHook.mutate();
+        break;
     }
   };
 
